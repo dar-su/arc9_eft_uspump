@@ -745,11 +745,11 @@ SWEP.AttachmentElements = {
     ["eft_mount_usp_elite"]    = { Bodygroups = { {6, 1} } },
     ["eft_mount_usp_match"]    = { Bodygroups = { {6, 2} } },
 
-    ["eft_ammo_45acp_fmj"]    = { Bodygroups = { {8, 1} } },
-    ["eft_ammo_45acp_ap"]    = { Bodygroups = { {8, 2} } },
-    ["eft_ammo_45acp_hydra"]    = { Bodygroups = { {8, 3} } },
-    ["eft_ammo_45acp_laser"]    = { Bodygroups = { {8, 4} } },
-    ["eft_ammo_45acp_rip"]    = { Bodygroups = { {8, 5} } },
+    ["eft_ammo_45acp_fmj"]    = { Bodygroups = { {8, 0} } },
+    ["eft_ammo_45acp_ap"]    = { Bodygroups = { {8, 1} } },
+    ["eft_ammo_45acp_hydra"]    = { Bodygroups = { {8, 2} } },
+    ["eft_ammo_45acp_laser"]    = { Bodygroups = { {8, 3} } },
+    ["eft_ammo_45acp_rip"]    = { Bodygroups = { {8, 4} } },
 }
 
 -- anger
