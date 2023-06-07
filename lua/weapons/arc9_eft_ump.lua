@@ -327,28 +327,28 @@ SWEP.BulletBones = {
 
 ------------------------- [[[           Sounds            ]]] -------------------------
 
-local path = "weapons/darsu_eft/mcxmpx/"
+local path = "weapons/darsu_eft/ump/"
 
 SWEP.ShootPitchVariation = 0
 SWEP.DistantShootVolume = 0.05
 SWEP.DistantShootVolumeActual = 0.05
 
-SWEP.ShootSound = { path .. "fire_new/mpx_outdoor_close_loop1.ogg", path .. "fire_new/mpx_outdoor_close_loop2.ogg", path .. "fire_new/mpx_outdoor_close_loop3.ogg", path .. "fire_new/mpx_outdoor_close_loop4.ogg" }
-SWEP.LayerSound = path .. "fire_new/mpx_outdoor_close_loop_tail.ogg"
+SWEP.ShootSound = { path .. "fire_new/ump_outdoor_close1.ogg", path .. "fire_new/ump_outdoor_close2.ogg", path .. "fire_new/ump_outdoor_close3.ogg", path .. "fire_new/ump_outdoor_close4.ogg" }
+SWEP.LayerSound = path .. "fire_new/ump_outdoor_close_tail.ogg"
 
-SWEP.ShootSoundSilenced = { path .. "fire_new/mpx_outdoor_close_silenced_loop1.ogg", path .. "fire_new/mpx_outdoor_close_silenced_loop2.ogg", path .. "fire_new/mpx_outdoor_close_silenced_loop3.ogg", path .. "fire_new/mpx_outdoor_close_silenced_loop4.ogg" }
-SWEP.LayerSoundSilenced = path .. "fire_new/mpx_outdoor_close_silenced_loop_tail.ogg"
+SWEP.ShootSoundSilenced = { path .. "fire_new/ump_outdoor_silenced_close1.ogg", path .. "fire_new/ump_outdoor_silenced_close2.ogg", path .. "fire_new/ump_outdoor_silenced_close3.ogg", path .. "fire_new/ump_outdoor_silenced_close4.ogg" }
+SWEP.LayerSoundSilenced = path .. "fire_new/ump_outdoor_silenced_close_tail.ogg"
 
-SWEP.ShootSoundIndoor = { path .. "fire_new/mpx_indoor_close_loop1.ogg", path .. "fire_new/mpx_indoor_close_loop2.ogg", path .. "fire_new/mpx_indoor_close_loop3.ogg", path .. "fire_new/mpx_indoor_close_loop4.ogg" }
-SWEP.LayerSoundIndoor = path .. "fire_new/mpx_indoor_close_loop_tail.ogg"
+SWEP.ShootSoundIndoor = { path .. "fire_new/ump_indoor_close1.ogg", path .. "fire_new/ump_indoor_close2.ogg", path .. "fire_new/ump_indoor_close3.ogg", path .. "fire_new/ump_indoor_close4.ogg" }
+SWEP.LayerSoundIndoor = path .. "fire_new/ump_indoor_close_tail.ogg"
 
-SWEP.ShootSoundSilencedIndoor = { path .. "fire_new/mpx_indoor_close_silenced_loop1.ogg", path .. "fire_new/mpx_indoor_close_silenced_loop2.ogg", path .. "fire_new/mpx_indoor_close_silenced_loop3.ogg", path .. "fire_new/mpx_indoor_close_silenced_loop4.ogg" }
-SWEP.LayerSoundSilencedIndoor = path .. "fire_new/mpx_indoor_close_silenced_loop_tail.ogg"
+SWEP.ShootSoundSilencedIndoor = { path .. "fire_new/ump_indoor_silenced_close1.ogg", path .. "fire_new/ump_indoor_silenced_close2.ogg", path .. "fire_new/ump_indoor_silenced_close3.ogg", path .. "fire_new/ump_indoor_silenced_close4.ogg" }
+SWEP.LayerSoundSilencedIndoor = path .. "fire_new/ump_indoor_silenced_close_tail.ogg"
 
-SWEP.DistantShootSound = { path .. "fire_new/mcx_outdoor_distant1.ogg", path .. "fire_new/mcx_outdoor_distant2.ogg" }
-SWEP.DistantShootSoundSilenced = { path .. "fire_new/mcx_outdoor_silenced_distant1.ogg", path .. "fire_new/mcx_outdoor_silenced_distant2.ogg" }
-SWEP.DistantShootSoundIndoor = { path .. "fire_new/mpx_indoor_distant_loop1.ogg", path .. "fire_new/mpx_indoor_distant_loop2.ogg" }
-SWEP.DistantShootSoundSilencedIndoor = { path .. "fire_new/mpx_indoor_distant_silenced_loop1.ogg", path .. "fire_new/mpx_indoor_distant_silenced_loop2.ogg" }
+SWEP.DistantShootSound = { path .. "fire_new/ump_outdoor_distant1.ogg", path .. "fire_new/ump_outdoor_distant2.ogg" }
+SWEP.DistantShootSoundSilenced = { path .. "fire_new/ump_outdoor_silenced_distant1.ogg", path .. "fire_new/ump_outdoor_silenced_distant2.ogg" }
+SWEP.DistantShootSoundIndoor = { path .. "fire_new/ump_indoor_distant1.ogg", path .. "fire_new/ump_indoor_distant2.ogg" }
+SWEP.DistantShootSoundSilencedIndoor = { path .. "fire_new/ump_indoor_silenced_distant1.ogg", path .. "fire_new/ump_indoor_silenced_distant2.ogg" }
 
 
 SWEP.FiremodeSound = "" -- we will have own in sound tables
@@ -449,108 +449,98 @@ SWEP.Hook_TranslateAnimation = function(swep, anim)
     
     local rst_single = {
         { s = "arc9_eft_shared/weap_handoff.ogg", t = 0.03},
-        { s = randspin, t = 0.31 },
-        { s = path .. "mpx_weap_bolt_out.ogg", t = 0.48 },
-        { s = path .. "mpx_weap_bolt_in.ogg", t = 0.83 },
-        { s = randspin, t = 1.03 },
-        { s = randspin, t = 1.59 },
-        { s = "arc9_eft_shared/weap_round_pullout.ogg", t = 1.92},
-        { s =  path .. "ak74_round_in_chamber.ogg", t = 2.42  },
-        { s = "arc9_eft_shared/weap_handon.ogg", t = 3.06},
-        { s = randspin, t = 3.43 },
-        { s = "arc9_eft_shared/weap_bolt_catch_button.ogg", t = 3.7 },
-        { s =  path .. "mpx_weap_bolt_in_fast.ogg", t = 3.82 },
-        { s = randspin, t = 4.12 },
+        { s = path .. "ump_bolt_out.ogg", t = 0.4 },
+        { s = path .. "p90_bolt_handle_grab.ogg", t = 0.53 },
+        { s = randspin, t = 0.76 },
+        { s = randspin, t = 1.21 },
+        { s = "arc9_eft_shared/weap_round_pullout.ogg", t = 1.59},
+        { s =  path .. "ak74_round_in_chamber.ogg", t = 2.21  },
+        { s = randspin, t = 2.98 },
+        { s = "arc9_eft_shared/weap_handoff.ogg", t = 3.23},
+        { s =  path .. "ump_bolt_in.ogg", t = 3.55  },
+        { s = randspin, t = 3.98 },
     }
     
 
-
     local rst_def = {
         { s = randspin, t = 0.05 },    
-        { s =  path .. "mpx_weap_magrelease_button.ogg", t = 0.43 },
-        { s =  path .. "mpx_weap_magout_plastic.ogg", t = 0.62 },
-        { s = pouchin, t = 1.18 },
-        { s = randspin, t = 1.2 },
-        { s = pouchout, t = 1.32 },
-        { s =  path .. "mpx_weap_magin_plastic.ogg", t = 1.77 },
-        { s = randspin, t = 2.37},
+        { s =  path .. "ump_magrelease_button.ogg", t = 0.35 },
+        { s =  path .. "ump_mag_out.ogg", t = 0.5 },
+        { s = pouchin, t = 0.99 },
+        { s = pouchout, t = 1.25 },
+        { s =  path .. "ump_mag_in.ogg", t = 1.73 },
+        { s = randspin, t = 2.25},
     }
     local rst_empty = {
-        { s = "arc9_eft_shared/weap_handoff.ogg", t = 0.05},
-        { s =  path .. "mpx_weap_magrelease_button.ogg", t = 0.25 },
-        { s =  path .. "mp7_mag_out.ogg", t = 0.35 },
-        { s = randspin, t = 0.74 },
-        { s = pouchout, t = 0.91 },
-        { s =  path .. "mpx_weap_magin_plastic.ogg", t = 1.45 },
-        { s = randspin, t = 1.72 },
-        { s = "arc9_eft_shared/weap_bolt_catch_button.ogg", t = 2.21 },
-        { s =  path .. "mpx_weap_bolt_in_fast.ogg", t = 2.3 },
-        { s = randspin, t = 2.72 },
+        { s = randspin, t = 0.05 },    
+        { s =  path .. "ump_magrelease_button.ogg", t = 0.34 },
+        { s =  path .. "ump_mag_out.ogg", t = 0.5 },
+        { s = pouchout, t = 1.1 },
+        { s = randspin, t = 1.3},
+        { s =  path .. "ump_mag_in.ogg", t = 1.72 },
+        { s = randspin, t = 2.01},
+        { s =  path .. "ump_catchrelease.ogg", t = 2.31 },
+        { s = randspin, t = 2.64 },
         {hide = 0, t = 0},
         {hide = 1, t = 0.7},
         {hide = 0, t = 1.5}
     }
     
 
-
     local rst_magcheck = {
         { s = "arc9_eft_shared/weap_handoff.ogg", t = 0.03},
-        { s =  path .. "mpx_weap_magrelease_button.ogg", t = 0.42 },
-        { s =  path .. "mpx_weap_magout_plastic.ogg", t = 0.53 },
-        { s = randspin, t = 0.78 },
-        { s = randspin, t = 1.18 },
-        { s = randspin, t = 1.58 },
-        { s =  path .. "mpx_weap_magin_plastic.ogg", t = 1.85 },
-        { s = randspin, t = 2.27},
+        { s =  path .. "ump_magrelease_button.ogg", t = 0.31 },
+        { s =  path .. "ump_mag_out.ogg", t = 0.5 },
+        { s = randspin, t = 0.82 },
+        -- { s = randspin, t = 1.06 },
+        -- { s = randspin, t = 1.63 },
+        { s =  path .. "ump_mag_in.ogg", t = 2.01 },
+        { s = randspin, t = 2.42},
     }
     local rik_magcheck = {
         { t = 0, lhik = 1 },
-        { t = 0.14, lhik = 0 },
+        { t = 0.1, lhik = 0 },
         { t = 0.85, lhik = 0 },
         { t = 1, lhik = 1 },
     }
     local rik_look = {
         { t = 0, lhik = 1 },
-        -- { t = 0.1, lhik = 0 },
-        -- { t = 0.8, lhik = 0 },
+        { t = 0.38, lhik = 1 },
+        { t = 0.51, lhik = 0 },
+        { t = 0.8, lhik = 0 },
         { t = 1, lhik = 1 },
     }
     local rik_single = {
         { t = 0, lhik = 1 },
-        { t = 0.07, lhik = 0 },
-        { t = 0.28, lhik = 0 },
-        { t = 0.36, lhik = 1 },
-        { t = 0.69, lhik = 1 },
-        { t = 0.77, lhik = 0 },
-        { t = 0.97, lhik = 1 },
+        { t = 0.06, lhik = 0 },
+        { t = 0.92, lhik = 0 },
+        { t = 0.99, lhik = 1 },
         { t = 1, lhik = 1 },
     }
     local rik_def = {
         { t = 0, lhik = 1 },
-        { t = 0.08, lhik = 0 },
-        { t = 0.86, lhik = 0 },
+        { t = 0.1, lhik = 0 },
+        { t = 0.83, lhik = 0 },
         { t = 1, lhik = 1 },
     }
     local rik_empty = {
         { t = 0, lhik = 1 },
-        { t = 0.1, lhik = 0 },
-        { t = 0.84, lhik = 0 },
-        { t = 0.97, lhik = 1 },
+        { t = 0.07, lhik = 0 },
+        { t = 0.82, lhik = 0 },
+        { t = 0.94, lhik = 1 },
         { t = 1, lhik = 1 },
     }
     local rik_ready = {
         { t = 0, lhik = 1 },
         { t = 0.001, lhik = 0 },
-        { t = 0.7, lhik = 0 },
-        { t = 0.92, lhik = 1 },
+        { t = 0.57, lhik = 0 },
+        { t = 0.85, lhik = 1 },
         { t = 1, lhik = 1 },
     }
 
     SWEP.Animations = {
         ["idle"] = {
             Source = "idle",
-            RareSource = {"tooidle0", "tooidle1", "tooidle2"},
-            RareSourceChance = 0.0001,
             Time = 1000, -- reset when done soundstables!!!!!!!!
         },
     
@@ -558,8 +548,8 @@ SWEP.Hook_TranslateAnimation = function(swep, anim)
             Source = {"ready0", "ready1", "ready2"},
             EventTable = {
                 { s = "arc9_eft_shared/weap_in.ogg", t = 0.05 },
-                { s = path .. "mpx_weap_bolt_out.ogg", t = 0.47 },
-                { s = path .. "mpx_weap_bolt_in.ogg", t = 0.79 },
+                { s = path .. "ump_bolt_out.ogg", t = 0.61 },
+                { s = path .. "ump_bolt_in.ogg", t = 0.79 },
             },
             IKTimeLine = rik_ready,
         },
@@ -593,13 +583,13 @@ SWEP.Hook_TranslateAnimation = function(swep, anim)
         ["fire"] = {
             Source = "fire",
             EventTable = {
-                { s = path .. "p90_trigger_hammer.ogg", t = 0 },
+                { s = path .. "mp7_hammer.ogg", t = 0 },
             }
         },
         ["fire_empty"] = {
             Source = "fire_last",
             EventTable = {
-                { s = path .. "p90_trigger_hammer.ogg", t = 0 },
+                { s = path .. "mp7_hammer.ogg", t = 0 },
             }
         },
         ["dryfire"] = {
@@ -664,20 +654,19 @@ SWEP.Hook_TranslateAnimation = function(swep, anim)
         ["jam1"] = {
             Source = "jam_shell",
             EventTable = {
-                { s = randspin, t = 0.1 },
-                { s = randspin, t = 0.6 },
-                { s = "arc9_eft_shared/weap_handoff.ogg", t = 1.04},
+                { s = randspin, t = 0.01 },
+                { s = randspin, t = 0.16 },
+                { s = "arc9_eft_shared/weap_handoff.ogg", t = 0.48},
 
-                { s = randspin, t = 1.04 },
-                { s =  path .. "ak74_round_out.ogg", t = 1.42 },
-                { s = randspin, t = 1.79 },
-                { s = randspin, t = 2 },
+                { s =  path .. "generic_jam_shell_ remove_medium2.ogg", t = 0.82 },
+                { s = randspin, t = 1.28 },
+                { s = randspin, t = 1.41 },
             },
             IKTimeLine = {
                 { t = 0, lhik = 1 },
-                { t = 0.11, lhik = 0 },
-                { t = 0.26, lhik = 0 },
-                { t = 0.4, lhik = 1 },
+                -- { t = 0.11, lhik = 0 },
+                -- { t = 0.26, lhik = 0 },
+                -- { t = 0.4, lhik = 1 },
                 { t = 1, lhik = 1 },
             },
             -- EjectAt = 1.97
@@ -686,57 +675,60 @@ SWEP.Hook_TranslateAnimation = function(swep, anim)
         ["jam3"] = {
             Source = "jam_hardjam",
             EventTable = {
-                { s = randspin, t = 0.1 },
-                { s = randspin, t = 0.6 },
-                { s = "arc9_eft_shared/weap_handoff.ogg", t = 1.04},
+                { s = randspin, t = 0.01 },
+                { s = randspin, t = 0.16 },
+                { s = randspin, t = 0.72 },
+                { s = "arc9_eft_shared/weap_handoff.ogg", t = 0.95},
 
-                { s = slidelockgrab, t = 1.61 },
-                { s = slidelockgrab, t = 1.93 },
-                { s = slidelockgrab, t = 2.36 },
-                { s = randspin, t = 2.73 },
-                { s = randspin, t = 2.93 },
-                { s = slidelockgrab, t = 3.57 },
-                { s = slidelockgrab, t = 3.95 },
-                { s =  path .. "mpx_weap_bolt_out.ogg", t = 4.25 },
-                { s =  path .. "mpx_weap_bolt_in.ogg", t = 4.47 },
-                { s = randspin, t = 4.81 },
+                { s =  path .. "p90_bolt_handle_grab.ogg", t = 1.26 },
+                { s = slidelockgrab, t = 1.51 },
+                { s = slidelockgrab, t = 1.77 },
+                { s = randspin, t = 2 },
+                { s = randspin, t = 2.56 },
+                { s = slidelockgrab, t = 2.81 },
+                { s = slidelockgrab, t = 3.15 },
+                { s = slidelockgrab, t = 3.49 },
+                { s =  path .. "p90_bolt_out_slow.ogg", t = 3.89 },
+                { s =  path .. "ump_bolt_in_slow.ogg", t = 4.14 },
+                { s = randspin, t = 4.54 },
             },
             IKTimeLine = {
                 { t = 0, lhik = 1 },
-                { t = 0.05, lhik = 0 },
-                { t = 0.14, lhik = 0 },
                 { t = 0.19, lhik = 1 },
                 { t = 0.25, lhik = 0 },
-                { t = 0.5, lhik = 0 },
-                { t = 0.6, lhik = 1 },
-                { t = 1, lhik = 1 },
+                { t = 0.9, lhik = 0 },
+                { t = 0.97, lhik = 1 },
             },
-            EjectAt = 4.05
+            EjectAt = 3.98
         },      
         
         ["jam2"] = {
             Source = "jam_feed",
             EventTable = {
-                { s = randspin, t = 0.1 },
-                { s = randspin, t = 0.6 },
-                { s = "arc9_eft_shared/weap_handoff.ogg", t = 1.04},
+                { s = randspin, t = 0.01 },
+                { s = randspin, t = 0.16 },
+                { s = randspin, t = 0.72 },
+                { s = "arc9_eft_shared/weap_handoff.ogg", t = 0.95},
+                { s =  path .. "p90_bolt_handle_grab.ogg", t = 1.42 },
 
-                { s =  path .. "weap_bolt_handle_out.ogg", t = 1.6 },
-                { s = slidelockgrab, t = 1.68 },
-                { s =  path .. "mpx_weap_bolt_out.ogg", t = 1.89 },
-                { s = randspin, t = 2.2 },
-                -- { s =  path .. "ak74_round_out.ogg", t = 2.24 },
-                { s =  path .. "mpx_weap_bolt_in.ogg", t = 2.5 },
-                { s = randspin, t = 2.78 },
+                { s =  path .. "p90_bolt_out_slow.ogg", t = 1.45 },
+                { s =  path .. "ump_bolt_out_slow.ogg", t = 1.78 },
+                { s =  path .. "p90_bolt_handle_grab.ogg", t = 1.96 },
+                { s = randspin, t = 2.21 },
+                { s = randspin, t = 2.62 },
+                { s = randspin, t = 2.97 },
+                { s = randspin, t = 3.11 },
+                { s =  path .. "generic_jam_shell_ remove_medium2.ogg", t = 3.19 },
+                { s = randspin, t = 3.44 },
+                { s =  path .. "ump_bolt_in.ogg", t = 3.78 },
+                { s = randspin, t = 4.07 },
             },
             IKTimeLine = {
                 { t = 0, lhik = 1 },
-                { t = 0.08, lhik = 0 },
-                { t = 0.22, lhik = 0 },
-                { t = 0.32, lhik = 1 },
-                { t = 0.41, lhik = 0 },
-                { t = 0.87, lhik = 0 },
-                { t = 0.98, lhik = 1 },
+                { t = 0.21, lhik = 1 },
+                { t = 0.28, lhik = 0 },
+                { t = 0.88, lhik = 0 },
+                { t = 0.97, lhik = 1 },
                 { t = 1, lhik = 1 },
             },
             -- EjectAt = 2.52
@@ -745,27 +737,26 @@ SWEP.Hook_TranslateAnimation = function(swep, anim)
         ["jam4"] = {
             Source = "jam_softjam",
             EventTable = {
-                { s = randspin, t = 0.1 },
-                { s = randspin, t = 0.6 },
-                { s = "arc9_eft_shared/weap_handoff.ogg", t = 1.04},
+                { s = randspin, t = 0.01 },
+                { s = randspin, t = 0.16 },
+                { s = randspin, t = 0.72 },
+                { s = "arc9_eft_shared/weap_handoff.ogg", t = 0.95},
 
-                { s = randspin, t = 1.19 },
-                { s = slidelockgrab, t = 1.66 },
-                { s =  path .. "mpx_weap_bolt_out.ogg", t = 1.96 },
-                { s =  path .. "mpx_weap_bolt_in.ogg", t = 2.22 },
-                { s = randspin, t = 2.41 },
+                { s =  path .. "p90_bolt_handle_grab.ogg", t = 1.34 },
+                { s = slidelockgrab, t = 1.5 },
+                { s =  path .. "ump_bolt_out_slow.ogg", t = 1.73 },
+                { s =  path .. "ump_bolt_in_slow.ogg", t = 1.97 },
+                { s = randspin, t = 2.29 },
             },
             IKTimeLine = {
                 { t = 0, lhik = 1 },
-                { t = 0.1, lhik = 0 },
-                { t = 0.22, lhik = 0 },
-                { t = 0.33, lhik = 1 },
+                { t = 0.38, lhik = 1 },
                 { t = 0.46, lhik = 0 },
-                { t = 0.81, lhik = 0 },
+                { t = 0.83, lhik = 0 },
                 { t = 0.95, lhik = 1 },
                 { t = 1, lhik = 1 },
             },
-            EjectAt = 2.85
+            EjectAt = 1.84
         },
     
         ["inspect"] = { -- TO STUPID ARK NINE SEE WE HAVE INSPECT
@@ -787,9 +778,11 @@ SWEP.Hook_TranslateAnimation = function(swep, anim)
         ["inspect_empty"] = {
             Source = "look_empty",
             EventTable = {
-                { s = randspin, t = 0.15 },
-                { s = "arc9_eft_shared/weapon_generic_pistol_spin4.ogg", t = 1.26 },
-                { s = randspin, t = 2.34 },
+                { s = randspin, t = 0.13 },
+                { s = "arc9_eft_shared/weap_handoff.ogg", t = 0.7},
+                { s = randspin, t = 1.32 },
+                { s = "arc9_eft_shared/weap_handon.ogg", t = 1.59},
+                { s = randspin, t = 2.33 },
             },
             IKTimeLine = rik_look
         },
@@ -809,17 +802,19 @@ SWEP.Hook_TranslateAnimation = function(swep, anim)
         ["inspect0"] = {
             Source = "check_chamber",
             EventTable = {
-                { s = randspin, t = 0.05 },
-                { s = "arc9_eft_shared/weap_bolt_handle_out.ogg", t = 0.61 },
-                { s = "arc9_eft_shared/weap_bolt_handle_in.ogg", t = 1.23 },
-                { s = randspin, t = 1.53 },
-                { s = randspin, t = 2.11 },
+                { s = randspin, t = 0.1 },
+                -- { s = randspin, t = 0.15 },
+                { s =  path .. "p90_bolt_handle_grab.ogg", t = 0.4 },
+                { s =  path .. "ump_bolt_out_slow.ogg", t = 0.5 },
+                { s =  path .. "ump_bolt_in_slow.ogg", t = 0.96 },
+                { s = randspin, t = 1.3 },
+                -- { s = randspin, t = 1.48 },
             },
             IKTimeLine = {
                 { t = 0, lhik = 1 },
-                { t = 0.14, lhik = 0 },
+                { t = 0.1, lhik = 0 },
                 { t = 0.75, lhik = 0 },
-                { t = 0.95, lhik = 1 },
+                { t = 0.94, lhik = 1 },
                 { t = 1, lhik = 1 },
             },
         },

@@ -319,18 +319,18 @@ SWEP.BulletBones = { -- the bone that represents bullets in gun/mag
 
 -------------------------- SOUNDS
 
-local path = "weapons/darsu_eft/m9a3/"
+local path = "weapons/darsu_eft/usp/"
 local pathgenericpistol = "weapons/darsu_eft/generic_pistol/"
 
-SWEP.ShootSound = { path .. "m9a3_fire_close.ogg" }
-SWEP.ShootSoundIndoor = path .. "m9a3_fire_indoor_close.ogg"
-SWEP.DistantShootSound = { path .. "m9a3_fire_distant.ogg" }
-SWEP.DistantShootSoundIndoor = path .. "m9a3_fire_indoor_distant.ogg"
+SWEP.ShootSound = { path .. "usp_fire_close.ogg" }
+SWEP.ShootSoundIndoor = path .. "usp_fire_indoor_close.ogg"
+SWEP.DistantShootSound = { path .. "usp_fire_distant.ogg" }
+SWEP.DistantShootSoundIndoor = path .. "usp_fire_indoor_distant.ogg"
 
-SWEP.ShootSoundSilenced = { path .. "m9a3_fire_close_silenced.ogg" }
-SWEP.ShootSoundSilencedIndoor = path .. "m9a3_fire_distant_silenced.ogg"
-SWEP.DistantShootSoundSilenced = path .. "m9a3_fire_distant_silenced.ogg"
-SWEP.DistantShootSoundSilencedIndoor = path .. "m9a3_fire_distant_indoor_silenced.ogg"
+SWEP.ShootSoundSilenced = { path .. "usp_fire_silenced_close.ogg" }
+SWEP.ShootSoundSilencedIndoor = path .. "usp_fire_silenced_indoor_close.ogg"
+SWEP.DistantShootSoundSilenced = path .. "usp_fire_silenced_distant.ogg"
+SWEP.DistantShootSoundSilencedIndoor = path .. "usp_fire_silenced_indoor_distant.ogg"
 
 SWEP.FiremodeSound = "" -- we will have own in sound tables
 SWEP.ToggleAttSound = ""-- we will have own in sound tables
@@ -342,22 +342,18 @@ SWEP.SuppressEmptySuffix = true
 SWEP.EnterSightsSound = "arc9_eft_shared/weap_in.ogg"
 SWEP.ExitSightsSound = "arc9_eft_shared/weap_handoff.ogg"
 
+
 SWEP.Hook_TranslateAnimation = function(swep, anim)
     local elements = swep:GetElements()
-
+    
     local ending = ""
 
-    -- local rand = math.Truncate(util.SharedRandom("hi", 0, 2.99)) -- 0, 1, 2
-    -- local rand = 0
-    local nomag = false
+    local nomag = !(elements["eft_mag_usp_std"] or elements["eft_mag_usp_tac"])
+    local empty = swep:Clip1() == 0
 
-    if elements["eft_mag_usp_std"] or elements["eft_mag_usp_tac"] then ending = 0 else nomag = true end
-
-    local empty = swep:Clip1() == 0 and !nomag
-    
     -- 0 looking
-    -- 1 slide check  (!empty)
-    -- 2 mag checking  (!nomag)
+    -- 1 mag check  (!nomag)
+    -- 2 slide checking  (!empty)
     
     if anim == "inspect" or anim == "inspect_empty" then
         swep.EFTInspectnum = swep.EFTInspectnum or 0
@@ -366,149 +362,147 @@ SWEP.Hook_TranslateAnimation = function(swep, anim)
         end
         local rand = swep.EFTInspectnum
         if rand == 3 then swep.EFTInspectnum = 0 rand = 0 end
-        if empty and rand == 0 then swep.EFTInspectnum = 1 rand = 1 end
+        
+        ending = rand
 
-        if rand == 2 and !nomag then -- mag
-            ending = "_mag_" .. ending
-            
-            if ARC9EFTBASE and SERVER then
-                net.Start("arc9eftmagcheck")
-                net.WriteBool(true) -- accurate or not based on mag type
-                net.WriteUInt(math.min(swep:Clip1(), swep:GetMaxClip1()), 9)
-                net.WriteUInt(swep:GetMaxClip1(), 9)
-                net.Send(swep:GetOwner())
-            end
-        else
-            if nomag then rand = 0 end
-            ending = rand
+        if nomag then
+            ending = 0
+        end
+
+        if SERVER and ending == 2 and ARC9EFTBASE then -- mag check
+            net.Start("arc9eftmagcheck")
+            net.WriteBool(true) -- accurate or not based on mag type
+            net.WriteUInt(math.min(swep:Clip1(), swep:GetMaxClip1()), 9)
+            net.WriteUInt(swep:GetMaxClip1(), 9)
+            net.Send(swep:GetOwner())
         end
 
         return anim .. ending
-    elseif anim == "reload" then
-        return anim .. (empty and "_empty" or "") .. ending
     end
-
+    
+    if nomag then -- reload
+        return anim .. "_single"
+    end
+    
     if anim == "fix" then
         rand = math.Truncate(util.SharedRandom("hi", 1, 4.99))
-        -- rand = 4
-
+        -- 0 = misfire, 1 = eject, 2 = feed, 3 = bolt, 4 = bolt
         if SERVER and ARC9EFTBASE then
             net.Start("arc9eftjam")
             net.WriteUInt(rand, 3)
             net.Send(swep:GetOwner())
         end
-
+        
         return "jam" .. rand
     end
-
-    -- print("nomag:", nomag, "rand:", rand, "anim:", anim, "ending:", ending)
 end
 
 local randspin = {"arc9_eft_shared/weapon_generic_rifle_spin1.ogg","arc9_eft_shared/weapon_generic_rifle_spin2.ogg","arc9_eft_shared/weapon_generic_rifle_spin3.ogg","arc9_eft_shared/weapon_generic_rifle_spin4.ogg","arc9_eft_shared/weapon_generic_rifle_spin5.ogg","arc9_eft_shared/weapon_generic_rifle_spin6.ogg","arc9_eft_shared/weapon_generic_rifle_spin7.ogg","arc9_eft_shared/weapon_generic_rifle_spin8.ogg","arc9_eft_shared/weapon_generic_rifle_spin9.ogg","arc9_eft_shared/weapon_generic_rifle_spin10.ogg"}
-local slidelock = {"arc9_eft_shared/pistol_jam_slidelock_try1.ogg", "arc9_eft_shared/pistol_jam_slidelock_try2.ogg", "arc9_eft_shared/pistol_jam_slidelock_try3.ogg"}
-local slidelockgrab = {"arc9_eft_shared/pistol_jam_slidelock_grab1.ogg", "arc9_eft_shared/pistol_jam_slidelock_grab2.ogg", "arc9_eft_shared/pistol_jam_slidelock_grab3.ogg"}
 local pouchin = {"arc9_eft_shared/generic_mag_pouch_in1.ogg","arc9_eft_shared/generic_mag_pouch_in2.ogg","arc9_eft_shared/generic_mag_pouch_in3.ogg","arc9_eft_shared/generic_mag_pouch_in4.ogg","arc9_eft_shared/generic_mag_pouch_in5.ogg","arc9_eft_shared/generic_mag_pouch_in6.ogg","arc9_eft_shared/generic_mag_pouch_in7.ogg"}
 local pouchout = {"arc9_eft_shared/generic_mag_pouch_out1.ogg","arc9_eft_shared/generic_mag_pouch_out2.ogg","arc9_eft_shared/generic_mag_pouch_out3.ogg","arc9_eft_shared/generic_mag_pouch_out4.ogg","arc9_eft_shared/generic_mag_pouch_out5.ogg","arc9_eft_shared/generic_mag_pouch_out6.ogg","arc9_eft_shared/generic_mag_pouch_out7.ogg"}
 
 local rst_single = {
-    { s = randspin, t = 0.05 },
-    { s = randspin, t = 0.4 },
-    { s = pathgenericpistol .. "grach_slider_in.ogg", t = 0.75 },
-    { s = "arc9_eft_shared/weap_round_pullout.ogg", t = 1.1},
-    { s = randspin, t = 1.53 },
-    { s =  pathgenericpistol .. "generic_jam_shell_ remove_medium3.ogg", t = 1.82  },
-    { s = randspin, t = 2.25 },
-    { s =  pathgenericpistol .. "pm_catch_slider.ogg", t = 2.75 },
-    { s = randspin, t = 3.08 },
+    -- { s = randspin, t = 3/26 },    
+    -- { s = "arc9_eft_shared/weap_handoff.ogg", t = 8/26 },
+    { s = "arc9_eft_shared/weap_round_pullout.ogg", t = 5/26 },
+    -- { s = randspin, t = 17/26  },
+    { s = path .. "fiveseven_slider_out_slow.ogg", t = 21/24 },
+    { s = "arc9_eft_shared/generic_jam_shell_ remove_medium3.ogg", t = 43/26  },
+    { s = randspin, t = 59/26 },
+    { s =  path .. "1911_slide_in_fast.ogg", t = 65/26 },
+    { s = randspin, t = 74/26 },
 }
 
 local rst_def = {
-    { s = randspin, t = 0.1 },
-    { s =  pathgenericpistol .. "kedr_fireselector_up.ogg", t = 0.46 }, -- eft devs redarded
-    { s =  pathgenericpistol .. "mpx_weap_magout_plastic.ogg", t = 0.55 },
-    { s = pouchin, t = 1.2 },
-    { s = pouchout, t = 1.6 },
-    { s = randspin, t = 1.7 },
-    { s =  pathgenericpistol .. "mpx_weap_magin_plastic.ogg", t = 2.35 },
-    { s = randspin, t = 3.12 },
+    { s = randspin, t = 4/28 },    
+    { s = "arc9_eft_shared/weap_handoff.ogg", t = 7/28 },
+    { s =  path .. "fiveseven_mag_releasebutton.ogg", t = 14/28 },
+    { s =  path .. "fiveseven_mag_out.ogg", t = 16/28 },
+    { s =  path .. "fiveseven_mag_rattle3.ogg", t = 21/28 },
+
+
+    { s =  path .. "fiveseven_mag_rattle.ogg", t = 25/28 },
+    -- { s = "arc9_eft_shared/weap_magin_sbrosnik.ogg", t = 35/28 },
+    -- { s = "arc9_eft_shared/weap_mag_pullout.ogg", t = 46/24 },
+    { s = pouchin, t = 1.08 },
+    { s = pouchout, t = 1.55 },
+
+    { s =  path .. "fiveseven_mag_rattle2.ogg", t = 56/28 },
+    { s =  path .. "fiveseven_mag_in.ogg", t = 62/28 },
+
+    { s = randspin, t = 75/28 },
 }
 
 local rst_empty = {
-    { s = randspin, t = 0.1 },    
-    { s =  pathgenericpistol .. "kedr_fireselector_up.ogg", t = 0.35 }, -- eft devs redarded
-    { s =  pathgenericpistol .. "mpx_weap_magout_plastic.ogg", t = 0.5 },
-    { s =  randspin, t = 0.53 },
-    { s =  randspin, t = 1.04 },
-    { s = pouchout, t = 1.15 },
-    { s =  pathgenericpistol .. "mpx_weap_magin_plastic.ogg", t = 1.69 },
-    { s = randspin, t = 2.24 },  
-    { s =  pathgenericpistol .. "pm_catch_slider.ogg", t = 2.67 },
-    { s = randspin, t = 2.95 },
+    { s = randspin, t = 3/28 },    
+    { s = "arc9_eft_shared/weap_handoff.ogg", t = 6/28 },
+    { s =  path .. "fiveseven_mag_releasebutton.ogg", t = 9/28 },
+    { s =  path .. "fiveseven_mag_out.ogg", t = 12/28 },
+    { s = pouchout, t = 0.95 },
+    { s =  randspin, t = 35/28 },
+    { s =  path .. "fiveseven_mag_rattle3.ogg", t = 41/28 },
+    { s =  path .. "fiveseven_mag_in.ogg", t = 46/28 },
+    { s = randspin, t = 59/28 },  
+    { s =  path .. "1911_slide_in_fast.ogg", t = 68/28 },
+    { s = randspin, t = 75/28 },
     {hide = 0, t = 0},
-    {hide = 1, t = 0.66},
-    {hide = 0, t = 1.15}
+    {hide = 1, t = 0.4},
+    {hide = 0, t = 0.9}
+    
 }
 
-local rst_magcheck = {
-    { s = randspin, t = 0.1 },
-    { s =  pathgenericpistol .. "kedr_fireselector_up.ogg", t = 0.23},
-    { s =  pathgenericpistol .. "mpx_weap_magout_plastic.ogg", t = 0.33 },
-    { s = randspin, t = 0.48 },
-    { s = randspin, t = 0.98 },
-    { s =  pathgenericpistol .. "mpx_weap_magin_plastic.ogg", t = 2.91 },
-    { s = randspin, t = 3.38 },
-}
+local slidelock = {"arc9_eft_shared/pistol_jam_slidelock_try1.ogg", "arc9_eft_shared/pistol_jam_slidelock_try2.ogg", "arc9_eft_shared/pistol_jam_slidelock_try3.ogg"}
+local slidelockgrab = {"arc9_eft_shared/pistol_jam_slidelock_grab1.ogg", "arc9_eft_shared/pistol_jam_slidelock_grab2.ogg", "arc9_eft_shared/pistol_jam_slidelock_grab3.ogg"}
 
 SWEP.Animations = {
     ["idle"] = {
         Source = "idle",
-        Time = 1000
     },
 
     ["ready"] = {
         Source = {"ready0", "ready1", "ready2"},
         EventTable = {
-            { s = "arc9_eft_shared/pm_draw.ogg", t = 0.05 },
-            { s = pathgenericpistol .. "grach_slider_in.ogg", t = 0.58 },
-            { s = pathgenericpistol .. "pm_slider_out.ogg", t = 0.75 },
+            { s = "arc9_eft_shared/pm_draw.ogg", t = 0 },
+            { s = path .. "1911_slide_in_fast.ogg", t = 16/24 },
+            { s = path .. "1911_slide_out.ogg", t = 20/24 },
         },
     },
 
     ["draw"] = {
         Source = "draw",
         EventTable = {
-            { s = "arc9_eft_shared/pm_draw.ogg", t = 0.05 },
+            { s = "arc9_eft_shared/pm_draw.ogg", t = 0 },
         }
     },
     ["draw_empty"] = {
         Source = "draw_empty",
         EventTable = {
-            { s = "arc9_eft_shared/pm_draw.ogg", t = 0.05 },
+            { s = "arc9_eft_shared/pm_draw.ogg", t = 0 },
         }
     },
     ["holster"] = {
         Source = "holster",
         EventTable = {
-            { s =  "arc9_eft_shared/pm_holster.ogg", t = 0 },
+            { s = "arc9_eft_shared/pm_holster.ogg", t = 0 },
         }
     },
     ["holster_empty"] = {
         Source = "holster_empty",
         EventTable = {
-            { s =  "arc9_eft_shared/pm_holster.ogg", t = 0 },
+            { s = "arc9_eft_shared/pm_holster.ogg", t = 0 },
         }
     },
 
     ["fire"] = {
         Source = "fire",
         EventTable = {
-            { s = pathgenericpistol .. "pm_trigger_hammer.ogg", t = 0 },
+            { s = "arc9_eft_shared/weap_trigger_hammer.ogg", t = 0 },
         }
     },
     ["fire_empty"] = {
         Source = "fire_last",
         EventTable = {
-            { s = pathgenericpistol .. "pm_catch_slider.ogg", t = 0.05 },
+            { s = path .. "1911_slide_out.ogg", t = 0.05 },
         }
     },
     ["dryfire"] = {
@@ -518,116 +512,120 @@ SWEP.Animations = {
         Source = "fire_dry_empty",
     },
 
-    ["reload"] = {
+    ["reload_single"] = {
         Source = "reload_single",
-        MinProgress = 0.9,
+        MinProgress = 0.85,
+        FireASAP = true,
+        EventTable = rst_single
+    },
+    ["reload_empty_single"] = {
+        Source = "reload_single",
+        MinProgress = 0.85,
         FireASAP = true,
         EventTable = rst_single
     },
 
-    ["reload0"] = {
+    ["reload"] = {
         Source = "reload",
-        MinProgress = 0.9,
-        Mult = 0.85,
+        MinProgress = 0.85,
         FireASAP = true,
         EventTable = rst_def
     },
-
-    ["reload_empty0"] = {
+    ["reload_empty"] = {
         Source = {"reload_empty0", "reload_empty1", "reload_empty2"}, 
-        MinProgress = 0.9,
-        Mult = 0.85,
+        MinProgress = 0.85,
         FireASAP = true,
         EventTable = rst_empty
     },
 
     ["toggle"] = {
         Source = "mod_switch",
-        EventTable = {{ s = {"arc9_eft_shared/weapon_light_switcher1.ogg", "arc9_eft_shared/weapon_light_switcher2.ogg", "arc9_eft_shared/weapon_light_switcher3.ogg"}, t = 0 },}
+        EventTable = {
+            { s = {"arc9_eft_shared/weapon_light_switcher1.ogg", "arc9_eft_shared/weapon_light_switcher2.ogg", "arc9_eft_shared/weapon_light_switcher3.ogg"}, t = 0 },
+        }
     },
     ["switchsights"] = {
         Source = "mod_switch",
-        EventTable = {{ s = {"arc9_eft_shared/weapon_light_switcher1.ogg", "arc9_eft_shared/weapon_light_switcher2.ogg", "arc9_eft_shared/weapon_light_switcher3.ogg"}, t = 0 },}
+        EventTable = {
+            { s = {"arc9_eft_shared/weapon_light_switcher1.ogg", "arc9_eft_shared/weapon_light_switcher2.ogg", "arc9_eft_shared/weapon_light_switcher3.ogg"}, t = 0 },
+        }
     },
     ["toggle_empty"] = {
         Source = "mod_switch_empty",
-        EventTable = {{ s = {"arc9_eft_shared/weapon_light_switcher1.ogg", "arc9_eft_shared/weapon_light_switcher2.ogg", "arc9_eft_shared/weapon_light_switcher3.ogg"}, t = 0 },}
+        EventTable = {
+            { s = {"arc9_eft_shared/weapon_light_switcher1.ogg", "arc9_eft_shared/weapon_light_switcher2.ogg", "arc9_eft_shared/weapon_light_switcher3.ogg"}, t = 0 },
+        }
     },
     ["switchsights_empty"] = {
         Source = "mod_switch_empty",
-        EventTable = {{ s = {"arc9_eft_shared/weapon_light_switcher1.ogg", "arc9_eft_shared/weapon_light_switcher2.ogg", "arc9_eft_shared/weapon_light_switcher3.ogg"}, t = 0 },}
+        EventTable = {
+            { s = {"arc9_eft_shared/weapon_light_switcher1.ogg", "arc9_eft_shared/weapon_light_switcher2.ogg", "arc9_eft_shared/weapon_light_switcher3.ogg"}, t = 0 },
+        }
     },
-
-
-
     
     ["jam1"] = {
         Source = "jam_shell",
         EventTable = {
-            { s = randspin, t = 0.05 },
-            { s = randspin, t = 0.59 },
-            { s = randspin, t = 1.04 },
-            { s = slidelockgrab, t = 1.67 },
-            { s = slidelockgrab, t = 2.07 },
-            { s = randspin, t = 2.13 },
-            { s = "arc9_eft_shared/weap_round_out.ogg", t = 2.18 },
-            { s =  pathgenericpistol .. "pm_slider_out.ogg", t = 2.38 },
-            { s = randspin, t = 2.7 },
+            { s = randspin, t = 0.05 + 1.292 },
+            { s = slidelock, t = 0.42 + 1.292 },
+            { s = slidelock, t = 0.9 + 1.292 },
+            { s = slidelock, t = 1.3 + 1.292 },
+            { s = slidelockgrab, t = 1.6 + 1.292 },
+            { s = "arc9_eft_shared/weap_round_out.ogg", t = 1.65 + 1.292 },
+            { s =  path .. "1911_slide_out.ogg", t = 2.1 + 1.292 },
+            { s = randspin, t = 2.51 + 1.292 },
         },
-        -- EjectAt = 1.97
+        EjectAt = 1.6 + 1.292
     },        
     
     ["jam3"] = {
-        Source = "jam_hardjam",
+        Source = "jam_hard",
         EventTable = {
-            { s = randspin, t = 0.05 },
-            { s = randspin, t = 0.59 },
-            { s = randspin, t = 1.04 },
-
-            { s = slidelockgrab, t = 1.54 },
-            { s = slidelockgrab, t = 1.89 },
-            { s = randspin, t = 2.55 },
-            { s = slidelockgrab, t = 3.03 },
-            { s =  pathgenericpistol .. "pm_slider_out.ogg", t = 3.72 },
-            { s = "arc9_eft_shared/weap_round_out.ogg", t = 3.8 },
-            { s =  pathgenericpistol .. "grach_slider_in.ogg", t = 4.03 },
-            { s = randspin, t = 4.46 },
+            { s = randspin, t = 0.05 + 1.292 },
+            { s = slidelockgrab, t = 0.65 + 1.292 },
+            { s = slidelockgrab, t = 1 + 1.292 },
+            { s = slidelockgrab, t = 1.42 + 1.292 },
+            { s = slidelockgrab, t = 1.6 + 1.292 },
+            { s =  path .. "1911_slide_out.ogg", t = 2.63 + 1.292 },
+            { s = "arc9_eft_shared/weap_round_out.ogg", t = 2.75 + 1.292 },
+            { s =  path .. "1911_slide_in_fast.ogg", t = 2.89 + 1.292 },
+            { s = randspin, t = 3.24 + 1.292 },
         },
-        EjectAt = 3.8
+        EjectAt = 2.75 + 1.292
     },      
     
     ["jam2"] = {
         Source = "jam_feed",
         EventTable = {
-            { s = randspin, t = 0.05 },
-            { s = randspin, t = 0.59 },
-            { s = randspin, t = 1.07 },
-            { s = slidelockgrab, t = 1.57 },
-            { s = slidelockgrab, t = 2.05 },
-            { s =  pathgenericpistol .. "pm_slider_out.ogg", t = 2.48 },
-            { s = "arc9_eft_shared/weap_round_out.ogg", t = 2.51 },
-            { s =  pathgenericpistol .. "grach_slider_in.ogg", t = 2.79 },
-            { s = randspin, t = 3.24 },
+            { s = randspin, t = 0.05 + 1.292 },
+            { s = slidelockgrab, t = 0.59 + 1.292 },
+            { s = slidelockgrab, t = 0.92 + 1.292 },
+            { s = slidelock, t = 1.2 + 1.292 },
+            { s =  path .. "fiveseven_slider_out_slow.ogg", t = 1.29 + 1.292 },
+            { s = randspin, t = 1.64 + 1.292 },
+            { s = randspin, t = 1.92 + 1.292 },
+            { s = randspin, t = 2.3 + 1.292 },
+            { s = randspin, t = 2.53 + 1.292 },
+            { s = "arc9_eft_shared/weap_round_out.ogg", t = 2.59 + 1.292 },
+            { s =  path .. "1911_slide_in_fast.ogg", t = 3.05 + 1.292 },
+            { s = randspin, t = 3.42 + 1.292 },
         },
-        -- EjectAt = 2.52
+        EjectAt = 2.59 + 1.292
     },        
     
     ["jam4"] = {
-        Source = "jam_softjam",
+        Source = "jam_soft",
         EventTable = {
-            { s = randspin, t = 0.05 },
-            { s = randspin, t = 0.59 },
-            { s = randspin, t = 1.07 },
-            
-            { s = slidelockgrab, t = 1.61 },
-            { s = randspin, t = 2.28 },
-            { s = slidelockgrab, t = 2.8 },
-            { s =  pathgenericpistol .. "pm_slider_out.ogg", t = 3.17 },
-            { s = "arc9_eft_shared/weap_round_out.ogg", t = 3.24 },
-            { s =  pathgenericpistol .. "grach_slider_in.ogg", t = 3.61 },
-            { s = randspin, t = 4 },
+            { s = randspin, t = 0.05 + 1.292 },
+            { s = slidelockgrab, t = 0.66 + 1.292 },
+            { s = slidelockgrab, t = 0.92 + 1.292 },
+            { s =  path .. "fiveseven_slider_out_slow.ogg", t = 0.96 + 1.292 },
+            { s = "arc9_eft_shared/weap_round_out.ogg", t = 1.04 + 1.292 },
+            { s =  path .. "1911_slide_in_fast.ogg", t = 1.21 + 1.292 },
+            { s = randspin, t = 1.55 + 1.292 },
+            { s = randspin, t = 1.73 + 1.292 },
         },
-        EjectAt = 3.24
+        EjectAt = 1.04 + 1.292
     },
 
     ["inspect"] = { -- TO STUPID ARK NINE SEE WE HAVE INSPECT
@@ -639,41 +637,79 @@ SWEP.Animations = {
 
     ["inspect1"] = {
         Source = "inspect",
+        MinProgress = 0.95,
         EventTable = {
-            { s = randspin, t = 0.09 },
-            { s = randspin, t = 1.44 },
-            { s = randspin, t = 2.76 },
+            { s = "arc9_eft_shared/weap_handoff.ogg", t = 0.1 },
+            { s = randspin, t = 0.5 },
+            { s = "arc9_eft_shared/weapon_generic_pistol_spin4.ogg", t = 1 },
+            { s = randspin, t = 1.5 },
+            { s = randspin, t = 2.5 },
         }
     },
 
-    ["inspect_empty"] = {
-        Source = "inspect_empty",
-        EventTable = {
-            { s = randspin, t = 0.09 },
-            { s = randspin, t = 1.44 },
-            { s = randspin, t = 2.76 },
-        }
-    },
-
-    ["inspect_mag_0"] = {
+    ["inspect2"] = {
         Source = "magcheck",
-        EventTable = rst_magcheck,
-    },
-    ["inspect_empty_mag_0"] = {
-        Source = "magcheck_empty",
-        EventTable = rst_magcheck,
+        MinProgress = 0.95,
+        EventTable = {
+            { s = "arc9_eft_shared/weap_handoff.ogg", t = 0.05 },
+            { s =  path .. "fiveseven_mag_releasebutton.ogg", t = 7/24 },
+            { s =  path .. "fiveseven_mag_out.ogg", t = 10/24 },
+            { s = randspin, t = 16/24 },
+            { s =  path .. "fiveseven_mag_rattle2.ogg", t = 24/24 },
+            { s = randspin, t = 29/24 },
+            -- { s =  path .. "fiveseven_mag_rattle3.ogg", t = 42/24 },
+            { s = randspin, t = 57/24 },
+            { s =  path .. "fiveseven_mag_rattle.ogg", t = 60/24 },
+            { s =  path .. "fiveseven_mag_in.ogg", t = 73/24 },
+            { s = randspin, t = 85/24 },
+        }
     },
 
     ["inspect0"] = {
         Source = "checkchamber",
+        MinProgress = 0.95,
         EventTable = {
-            { s = randspin, t = 0.1 },
-            { s = pathgenericpistol .. "grach_slider_in.ogg", t = 0.56 },
-            { s = pathgenericpistol .. "pm_slider_out.ogg", t = 1.16 },
-            { s = randspin, t = 1.38 },
+            { s = "arc9_eft_shared/weap_handoff.ogg", t = 0.05 },
+            { s = randspin, t = 10/24 },
+            { s = path .. "fiveseven_slider_out_slow.ogg", t = 19/24 },
+            { s = randspin, t = 26/24 },
+            { s = path .. "fiveseven_slider_in_slow.ogg", t = 35/24 },
+            { s = randspin, t = 48/24 },
         }
     },
+
+    ["inspect_empty0"] = {
+        Source = "inspect_empty",
+        MinProgress = 0.95,
+        EventTable = {
+            { s = "arc9_eft_shared/weap_handoff.ogg", t = 0.1 },
+            { s = randspin, t = 0.5 },
+            { s = "arc9_eft_shared/weapon_generic_pistol_spin4.ogg", t = 1 },
+            { s = randspin, t = 1.5 },
+            { s = randspin, t = 2.5 },
+        }
+    },
+
+    ["inspect_empty2"] = {
+        Source = "magcheck_empty",
+        MinProgress = 0.95,
+        EventTable = {
+            { s = "arc9_eft_shared/weap_handoff.ogg", t = 0.05 },
+            { s =  path .. "fiveseven_mag_releasebutton.ogg", t = 7/24 },
+            { s =  path .. "fiveseven_mag_out.ogg", t = 10/24 },
+            { s = randspin, t = 16/24 },
+            { s =  path .. "fiveseven_mag_rattle2.ogg", t = 24/24 },
+            { s = randspin, t = 29/24 },
+            -- { s =  path .. "fiveseven_mag_rattle3.ogg", t = 42/24 },
+            { s = randspin, t = 57/24 },
+            { s =  path .. "fiveseven_mag_rattle.ogg", t = 60/24 },
+            { s =  path .. "fiveseven_mag_in.ogg", t = 73/24 },
+            { s = randspin, t = 85/24 },
+        }
+    },
+    
 }
+
 
 SWEP.ReloadHideBoneTables = {
     [1] = {
