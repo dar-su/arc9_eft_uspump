@@ -19,4 +19,14 @@
 
 	"$envmaptint" "[0.05 0.05 0.05]"
 	"$color2" "[0.88 0.88 0.88]"
+	
+	"Proxies"
+     {
+        "Arc9EnvMapTint"
+        {
+            "specularity" "0.5"
+            "min" "0"
+            "max" "0.05"
+        }
+     }
 }

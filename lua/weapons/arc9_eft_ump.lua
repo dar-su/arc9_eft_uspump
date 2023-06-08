@@ -38,53 +38,53 @@ SWEP.DefaultBodygroups = "00000000000000"
 
 ------------------------- [[[           STATS            ]]] -------------------------
 
--- default pst ghz
+-- default pst fmj
 
-SWEP.DamageMax = 54/2
-SWEP.DamageMin = 30/2
-SWEP.PhysBulletMuzzleVelocity = 457 /0.0254
+SWEP.DamageMax = 72 * 0.5
+SWEP.DamageMin = 47.93 * 0.5
+SWEP.PhysBulletMuzzleVelocity = 340  /0.0254
+
 SWEP.RangeMin = 10
-SWEP.RangeMax = 1000 /0.0254
+SWEP.RangeMax = 1000 /0.0254 * 1
 
-SWEP.Penetration =      20 *2.54/100/0.0254
-SWEP.PenetrationDelta = 33/100
-SWEP.ArmorPiercing =    33/100
-SWEP.RicochetChance =   5/100
-
+SWEP.Penetration =      25 *2.54/100/0.0254
+SWEP.PenetrationDelta = 36/100
+SWEP.ArmorPiercing =    36/100
+SWEP.RicochetChance =   6.5/100
 
 SWEP.DamageLookupTable = {
-    {   10/0.0254, 
-    54/2     },
+    {   10/0.0254 * 1, 
+    72 * 0.5     },
 
-    {   100 /0.0254, 
-    43.77/2     },
+    {   100 /0.0254 * 1, 
+    66.36 * 0.5     },
 
-    {   200 /0.0254, 
-    40.34/2     },
+    {   200 /0.0254 * 1, 
+    62.8 * 0.5     },
 
-    {   300 /0.0254, 
-    37.92/2     },
+    {   300 /0.0254 * 1, 
+    60 * 0.5     },
 
-    {   400 /0.0254, 
-    35.98/2     },
+    {   400 /0.0254 * 1, 
+    57.63 * 0.5     },
 
-    {   500 /0.0254, 
-    34.32/2     },
+    {   500 /0.0254 * 1, 
+    55.53 * 0.5     },
 
-    {   600 /0.0254, 
-    32.96/2     },
+    {   600 /0.0254 * 1, 
+    53.66 * 0.5     },
 
-    {   700 /0.0254, 
-    31.9/2     },
+    {   700 /0.0254 * 1, 
+    51.97 *0.5     },
 
-    {   800 /0.0254, 
-    31.12/2     },
+    {   800 /0.0254 * 1, 
+    50.47 * 0.5     },
 
-    {   900 /0.0254, 
-    30.65/2     },
+    {   900 /0.0254 * 1, 
+    49.12* 0.5     },
 
-    {   1000 /0.0254, 
-    30.51/2     },
+    {   1000 /0.0254 * 1, 
+    47.93 * 0.5     },
 }
 
 
@@ -541,7 +541,7 @@ SWEP.Hook_TranslateAnimation = function(swep, anim)
     SWEP.Animations = {
         ["idle"] = {
             Source = "idle",
-            Time = 1000, -- reset when done soundstables!!!!!!!!
+            -- Time = 1000, -- reset when done soundstables!!!!!!!!
         },
     
         ["ready"] = {
