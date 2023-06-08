@@ -98,13 +98,13 @@ SWEP.SpreadAddMove = 0.015
 
 --          Recoil
 
-SWEP.Recoil = 0.1
+SWEP.Recoil = 0.3
 
 SWEP.RecoilMultHipFire = 1.1
 SWEP.RecoilMultCrouch = 0.75
 SWEP.RecoilAutoControlMultHipFire = 0.5
 
-SWEP.RecoilUp = 5
+SWEP.RecoilUp = 7
 SWEP.RecoilSide = 0.7
 SWEP.RecoilRandomUp = 0.1
 SWEP.RecoilRandomSide = 0.61
@@ -129,17 +129,17 @@ SWEP.VisualRecoilMultCrouch = 0.5
 
 SWEP.VisualRecoilCenter = Vector(2, 17, 2)
 SWEP.VisualRecoilUp = 200*0.85
-SWEP.VisualRecoilSide = 10 
+SWEP.VisualRecoilSide = 8 
 SWEP.VisualRecoilRoll = 33 -- Roll tilt
 
 SWEP.VisualRecoilPunch = 60 -- How far back visual recoil moves the gun
-SWEP.VisualRecoilPunchSights = -450 -- How far back visual recoil moves the gun
+SWEP.VisualRecoilPunchSights = -300 -- How far back visual recoil moves the gun
 
 
 SWEP.VisualRecoilSpringPunchDamping = 16
 SWEP.VisualRecoilDampingConst = 350
 SWEP.VisualRecoilSpringMagnitude = 2 / 1.67
-SWEP.VisualRecoilPositionBumpUp = -0.05 
+SWEP.VisualRecoilPositionBumpUp = -0.04 
 SWEP.VisualRecoilPositionBumpUpRTScope = -0.005
 SWEP.VisualRecoilPositionBumpUpHipFire = -0.01
 
@@ -160,7 +160,7 @@ SWEP.VisualRecoilDoingFunc = function(up, side, roll, punch, recamount)
     if recamount > 2 then
         recamount = 1.25 - math.Clamp((recamount - 2) / 5, 0, 1)
         
-        local fakerandom = (((69+recamount%5*CurTime()%3)*2420)%4) * (1-recamount) * 0.5
+        local fakerandom = (((69+recamount%5*CurTime()%3)*2420)%4) * (1-recamount) * 1.3
         
         return up * recamount + fakerandom, side * 10, roll, punch * 0.5
     elseif recamount == 1 then
@@ -180,10 +180,10 @@ SWEP.RecoilKickDamping = 10
 
 SWEP.Malfunction = true 
 SWEP.MalfunctionNeverLastShoot = false 
-SWEP.MalfunctionMeanShotsToFail = 583
-SWEP.MalfunctionMeanShotsToFailMultHot = -0.2
+SWEP.MalfunctionMeanShotsToFail = 700
+SWEP.MalfunctionMeanShotsToFailMultHot = 0.2
 SWEP.Overheat = true
-SWEP.HeatCapacity = 240
+SWEP.HeatCapacity = 160
 SWEP.HeatDissipation = 2.5
 SWEP.HeatPerShot = 1
 SWEP.HeatLockout = false
@@ -255,7 +255,7 @@ SWEP.TracerColor = Color(255, 225, 200)
 --          Positions and offsets
 
 SWEP.IronSights = {
-    Pos = Vector(-4.28, -5, 1.46),
+    Pos = Vector(-4.28, -7.5, 1.46),
     Ang = Angle(0, 0.05, 0),
     Midpoint = { Pos = Vector(-1, 0, 8), Ang = Angle(0, 0, -145) },
     Magnification = 1.1,
@@ -308,7 +308,7 @@ SWEP.CamOffsetAng = Angle(0, 0, 90)
 SWEP.CamQCA_Mult = 0.3
 SWEP.CamQCA_Mult_ADS = 0.05
 
-SWEP.MuzzleParticle = "muzzleflash_smg"
+SWEP.MuzzleParticle = "muzzleflash_1"
 
 SWEP.CaseEffectQCA = 2
 SWEP.ShellModel = "models/weapons/arc9/darsu_eft/shells/45acp.mdl"
@@ -411,7 +411,7 @@ SWEP.Hook_TranslateAnimation = function(swep, anim)
                 if ARC9EFTBASE and SERVER then
                     net.Start("arc9eftmagcheck")
                     net.WriteBool(true) -- accurate or not based on mag type
-                    net.WriteUInt(math.min(swep:Clip1(), swep:GetMaxClip1()), 9)
+                    net.WriteUInt(math.min(swep:Clip1(), swep:GetCapacity()), 9)
                     net.WriteUInt(swep:GetMaxClip1(), 9)
                     net.Send(swep:GetOwner())
                 end
@@ -963,7 +963,7 @@ SWEP.Attachments = {
     },
 }
 
-SWEP.EFTErgo = 40
+SWEP.EFTErgo = 62
 if ARC9EFTBASE then
     SWEP.AimDownSightsTimeHook = ARC9EFT.ErgoHook or nil
     SWEP.HoldBreathTimeHook = ARC9EFT.ErgoBreathHook or nil

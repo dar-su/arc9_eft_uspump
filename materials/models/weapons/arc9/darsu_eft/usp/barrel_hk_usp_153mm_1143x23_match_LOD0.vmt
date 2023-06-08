@@ -19,4 +19,23 @@
 
 	"$envmaptint" "[0.05 0.05 0.05]"
 	"$color2" "[0.88 0.88 0.88]"
+
+	"$detail" "models/weapons/arc9/darsu_eft/usp/matchh"
+    "$detailscale" "1"
+    "$detailblendfactor" "0"
+    "$detailblendmode" "5"
+	
+	"Proxies"
+     {
+        // "Arc9EnvMapTint"
+        // {
+        //     "specularity" "0.5"
+        //     "min" "0"
+        //     "max" "0.05"
+        // }
+
+    	"ARC9_Heat" {
+			blend $detailblendfactor
+    	}
+     }
 }

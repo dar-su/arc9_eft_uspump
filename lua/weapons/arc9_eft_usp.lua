@@ -152,24 +152,24 @@ SWEP.ViewRecoilSideMult = 300
 
 SWEP.UseVisualRecoil = true 
 
-SWEP.VisualRecoil = 1.03*0.85
+SWEP.VisualRecoil = 1.03
 SWEP.VisualRecoilMultSights = 1
 SWEP.VisualRecoilMultCrouch = 0.5
 
-SWEP.VisualRecoilUp = 45 * 0.85 -- patch 0.13.0.4.22617
+SWEP.VisualRecoilUp = 45 * 0.85 * 0.85
 -- SWEP.VisualRecoilUp = 45
 SWEP.VisualRecoilSide = 333 -- Horizontal tilt for visual recoil.
 SWEP.VisualRecoilRoll = 6 -- Roll tilt for visual recoil.
 
 SWEP.VisualRecoilCenter = Vector(2, 17, 2) -- The "axis" of visual recoil. Where your hand is.
 
-SWEP.VisualRecoilPunch = 1 -- How far back visual recoil moves the gun.
-SWEP.VisualRecoilPunchMultSights = 0.5
-SWEP.VisualRecoilPositionBumpUp = -0.009
+SWEP.VisualRecoilPunch = 3 -- How far back visual recoil moves the gun.
+SWEP.VisualRecoilPunchMultSights = 1.5
+SWEP.VisualRecoilPositionBumpUp = -0.04
 
-SWEP.VisualRecoilSpringPunchDamping = 8.2
+SWEP.VisualRecoilSpringPunchDamping = 8
 SWEP.VisualRecoilDampingConst = 1000 
-SWEP.VisualRecoilSpringMagnitude = 1 / 1.67
+SWEP.VisualRecoilSpringMagnitude = 2
 
 
 
@@ -371,7 +371,7 @@ SWEP.Hook_TranslateAnimation = function(swep, anim)
         if SERVER and ending == 2 and ARC9EFTBASE then -- mag check
             net.Start("arc9eftmagcheck")
             net.WriteBool(true) -- accurate or not based on mag type
-            net.WriteUInt(math.min(swep:Clip1(), swep:GetMaxClip1()), 9)
+            net.WriteUInt(math.min(swep:Clip1(), swep:GetCapacity()), 9)
             net.WriteUInt(swep:GetMaxClip1(), 9)
             net.Send(swep:GetOwner())
         end
@@ -403,7 +403,7 @@ local pouchout = {"arc9_eft_shared/generic_mag_pouch_out1.ogg","arc9_eft_shared/
 local rst_single = {
     -- { s = randspin, t = 3/26 },    
     { s = "arc9_eft_shared/weap_handoff.ogg", t = 0.12 },
-    { s = "arc9_eft_shared/weap_round_pullout.ogg", t = 0.2 },
+    { s = "arc9_eft_shared/weap_round_pullout.ogg", t = 0.01 },
     { s = randspin, t = 0.58  },
     { s = path .. "1911_slide_in_fast.ogg", t = 1 },
     { s = randspin, t = 1.28  },
@@ -927,7 +927,7 @@ SWEP.Attachments = {
     },
 }
 
-SWEP.EFTErgo = 70
+SWEP.EFTErgo = 82
 if ARC9EFTBASE then
     SWEP.AimDownSightsTimeHook = ARC9EFT.ErgoHook or nil
     SWEP.HoldBreathTimeHook = ARC9EFT.ErgoBreathHook or nil
