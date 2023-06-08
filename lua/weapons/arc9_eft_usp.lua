@@ -5,7 +5,7 @@ SWEP.Base = "arc9_base"
 SWEP.Spawnable = true
 SWEP.Category = "ARC9 - Escape From Tarkov"
 SWEP.SubCategory = ARC9:GetPhrase("eft_subcat_pist")
-SWEP.SubCategory = "_Not for your eyesss"
+-- SWEP.SubCategory = "_Not for your eyesss"
 
 SWEP.PrintName = "HK USP .45"
 
@@ -123,7 +123,7 @@ SWEP.DropMagazineVelocity = Vector(0, 0, 0)
 
 SWEP.Overheat = true
 SWEP.HeatCapacity = 100
-SWEP.HeatDissipation = 2
+SWEP.HeatDissipation = 0.75
 SWEP.HeatLockout = false
 -------------------------- FIREMODES
 
