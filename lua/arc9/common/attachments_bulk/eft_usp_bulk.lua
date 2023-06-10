@@ -548,7 +548,7 @@ ATT = {}
 
 ATT.PrintName = "HK USP Tactical .45 ACP 12-round magazine"
 ATT.CompactName = "USP45T"
-ATT.Icon = Material("entities/eft_usp_attachments/12.png", "mips smooth")
+ATT.Icon = Material("entities/eft_usp_attachments/12t.png", "mips smooth")
 ATT.Description = [[A standard-issue 12-round .45 ACP magazine for the USP45 pistol.]]
 
 ATT.MenuCategory = "ARC9 - EFT Attachments"
