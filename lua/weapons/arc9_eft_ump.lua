@@ -489,13 +489,13 @@ SWEP.Hook_TranslateAnimation = function(swep, anim)
 
     local rst_magcheck = {
         { s = "arc9_eft_shared/weap_handoff.ogg", t = 0.03},
-        { s =  path .. "ump_magrelease_button.ogg", t = 0.31 },
-        { s =  path .. "ump_mag_out.ogg", t = 0.5 },
-        { s = randspin, t = 0.82 },
+        { s =  path .. "ump_magrelease_button.ogg", t = 0.31 * 1.167 },
+        { s =  path .. "ump_mag_out.ogg", t = 0.5 * 1.167 },
+        { s = randspin, t = 0.82 * 1.167 },
         -- { s = randspin, t = 1.06 },
         -- { s = randspin, t = 1.63 },
-        { s =  path .. "ump_mag_in.ogg", t = 2.01 },
-        { s = randspin, t = 2.42},
+        { s =  path .. "ump_mag_in.ogg", t = 2.01 * 1.167 },
+        { s = randspin, t = 2.42 * 1.167},
     }
     local rik_magcheck = {
         { t = 0, lhik = 1 },
@@ -547,9 +547,9 @@ SWEP.Hook_TranslateAnimation = function(swep, anim)
         ["ready"] = {
             Source = {"ready0", "ready1", "ready2"},
             EventTable = {
-                { s = "arc9_eft_shared/weap_in.ogg", t = 0.05 },
-                { s = path .. "ump_bolt_out.ogg", t = 0.61 },
-                { s = path .. "ump_bolt_in.ogg", t = 0.79 },
+                { s = "arc9_eft_shared/weap_in.ogg", t = 0.05 * 1.167 },
+                { s = path .. "ump_bolt_out.ogg", t = 0.61 * 1.167 },
+                { s = path .. "ump_bolt_in.ogg", t = 0.79 * 1.167 },
             },
             IKTimeLine = rik_ready,
         },
@@ -655,12 +655,12 @@ SWEP.Hook_TranslateAnimation = function(swep, anim)
             Source = "jam_shell",
             EventTable = {
                 { s = randspin, t = 0.01 },
-                { s = randspin, t = 0.16 },
-                { s = "arc9_eft_shared/weap_handoff.ogg", t = 0.48},
+                { s = randspin, t = 0.16 * 1.08 },
+                { s = "arc9_eft_shared/weap_handoff.ogg", t = 0.48 * 1.08},
 
-                { s =  path .. "generic_jam_shell_ remove_medium2.ogg", t = 0.82 },
-                { s = randspin, t = 1.28 },
-                { s = randspin, t = 1.41 },
+                { s =  path .. "generic_jam_shell_ remove_medium2.ogg", t = 0.82 * 1.08 },
+                { s = randspin, t = 1.28 * 1.08 },
+                { s = randspin, t = 1.41 * 1.08 },
             },
             IKTimeLine = {
                 { t = 0, lhik = 1 },
@@ -676,21 +676,21 @@ SWEP.Hook_TranslateAnimation = function(swep, anim)
             Source = "jam_hardjam",
             EventTable = {
                 { s = randspin, t = 0.01 },
-                { s = randspin, t = 0.16 },
-                { s = randspin, t = 0.72 },
-                { s = "arc9_eft_shared/weap_handoff.ogg", t = 0.95},
+                { s = randspin, t = 0.16 * 1.08 },
+                { s = randspin, t = 0.72 * 1.08 },
+                { s = "arc9_eft_shared/weap_handoff.ogg", t = 0.95 * 1.08},
 
-                { s =  path .. "p90_bolt_handle_grab.ogg", t = 1.26 },
-                { s = slidelockgrab, t = 1.51 },
-                { s = slidelockgrab, t = 1.77 },
-                { s = randspin, t = 2 },
-                { s = randspin, t = 2.56 },
-                { s = slidelockgrab, t = 2.81 },
-                { s = slidelockgrab, t = 3.15 },
-                { s = slidelockgrab, t = 3.49 },
-                { s =  path .. "p90_bolt_out_slow.ogg", t = 3.89 },
-                { s =  path .. "ump_bolt_in_slow.ogg", t = 4.14 },
-                { s = randspin, t = 4.54 },
+                { s =  path .. "p90_bolt_handle_grab.ogg", t = 1.26 * 1.08 },
+                { s = slidelockgrab, t = 1.51 * 1.08 },
+                { s = slidelockgrab, t = 1.77 * 1.08 },
+                { s = randspin, t = 2 * 1.08 },
+                { s = randspin, t = 2.56 * 1.08 },
+                { s = slidelockgrab, t = 2.81 * 1.08 },
+                { s = slidelockgrab, t = 3.15 * 1.08 },
+                { s = slidelockgrab, t = 3.49 * 1.08 },
+                { s =  path .. "p90_bolt_out_slow.ogg", t = 3.89 * 1.08 },
+                { s =  path .. "ump_bolt_in_slow.ogg", t = 4.14 * 1.08 },
+                { s = randspin, t = 4.54 * 1.08 },
             },
             IKTimeLine = {
                 { t = 0, lhik = 1 },
@@ -699,29 +699,29 @@ SWEP.Hook_TranslateAnimation = function(swep, anim)
                 { t = 0.9, lhik = 0 },
                 { t = 0.97, lhik = 1 },
             },
-            EjectAt = 3.98
+            EjectAt = 3.98 * 1.08
         },      
         
         ["jam2"] = {
             Source = "jam_feed",
             EventTable = {
                 { s = randspin, t = 0.01 },
-                { s = randspin, t = 0.16 },
-                { s = randspin, t = 0.72 },
-                { s = "arc9_eft_shared/weap_handoff.ogg", t = 0.95},
-                { s =  path .. "p90_bolt_handle_grab.ogg", t = 1.42 },
+                { s = randspin, t = 0.16 * 1.08 },
+                { s = randspin, t = 0.72 * 1.08 },
+                { s = "arc9_eft_shared/weap_handoff.ogg", t = 0.95 * 1.08},
+                { s =  path .. "p90_bolt_handle_grab.ogg", t = 1.42 * 1.08 },
 
-                { s =  path .. "p90_bolt_out_slow.ogg", t = 1.45 },
-                { s =  path .. "ump_bolt_out_slow.ogg", t = 1.78 },
-                { s =  path .. "p90_bolt_handle_grab.ogg", t = 1.96 },
-                { s = randspin, t = 2.21 },
-                { s = randspin, t = 2.62 },
-                { s = randspin, t = 2.97 },
-                { s = randspin, t = 3.11 },
-                { s =  path .. "generic_jam_shell_ remove_medium2.ogg", t = 3.19 },
-                { s = randspin, t = 3.44 },
-                { s =  path .. "ump_bolt_in.ogg", t = 3.78 },
-                { s = randspin, t = 4.07 },
+                { s =  path .. "p90_bolt_out_slow.ogg", t = 1.45 * 1.08 },
+                { s =  path .. "ump_bolt_out_slow.ogg", t = 1.78 * 1.08 },
+                { s =  path .. "p90_bolt_handle_grab.ogg", t = 1.96 * 1.08 },
+                { s = randspin, t = 2.21 * 1.08 },
+                { s = randspin, t = 2.62 * 1.08 },
+                { s = randspin, t = 2.97 * 1.08 },
+                { s = randspin, t = 3.11 * 1.08 },
+                { s =  path .. "generic_jam_shell_ remove_medium2.ogg", t = 3.19 * 1.08 },
+                { s = randspin, t = 3.44 * 1.08 },
+                { s =  path .. "ump_bolt_in.ogg", t = 3.78 * 1.08 },
+                { s = randspin, t = 4.07 * 1.08 },
             },
             IKTimeLine = {
                 { t = 0, lhik = 1 },
@@ -738,15 +738,15 @@ SWEP.Hook_TranslateAnimation = function(swep, anim)
             Source = "jam_softjam",
             EventTable = {
                 { s = randspin, t = 0.01 },
-                { s = randspin, t = 0.16 },
-                { s = randspin, t = 0.72 },
-                { s = "arc9_eft_shared/weap_handoff.ogg", t = 0.95},
+                { s = randspin, t = 0.16 * 1.08 },
+                { s = randspin, t = 0.72 * 1.08 },
+                { s = "arc9_eft_shared/weap_handoff.ogg", t = 0.95 * 1.08},
 
-                { s =  path .. "p90_bolt_handle_grab.ogg", t = 1.34 },
-                { s = slidelockgrab, t = 1.5 },
-                { s =  path .. "ump_bolt_out_slow.ogg", t = 1.73 },
-                { s =  path .. "ump_bolt_in_slow.ogg", t = 1.97 },
-                { s = randspin, t = 2.29 },
+                { s =  path .. "p90_bolt_handle_grab.ogg", t = 1.34 * 1.08 },
+                { s = slidelockgrab, t = 1.5 * 1.08 },
+                { s =  path .. "ump_bolt_out_slow.ogg", t = 1.73 * 1.08 },
+                { s =  path .. "ump_bolt_in_slow.ogg", t = 1.97 * 1.08 },
+                { s = randspin, t = 2.29 * 1.08 },
             },
             IKTimeLine = {
                 { t = 0, lhik = 1 },
@@ -756,7 +756,7 @@ SWEP.Hook_TranslateAnimation = function(swep, anim)
                 { t = 0.95, lhik = 1 },
                 { t = 1, lhik = 1 },
             },
-            EjectAt = 1.84
+            EjectAt = 1.84 * 1.08
         },
     
         ["inspect"] = { -- TO STUPID ARK NINE SEE WE HAVE INSPECT
@@ -770,8 +770,8 @@ SWEP.Hook_TranslateAnimation = function(swep, anim)
             Source = "look",
             EventTable = {
                 { s = randspin, t = 0.15 },
-                { s = "arc9_eft_shared/weapon_generic_pistol_spin4.ogg", t = 1.26 },
-                { s = randspin, t = 2.34 },
+                { s = "arc9_eft_shared/weapon_generic_pistol_spin4.ogg", t = 1.26 * 1.167 },
+                { s = randspin, t = 2.34 * 1.167 },
             },
             IKTimeLine = rik_look
         },
@@ -779,10 +779,10 @@ SWEP.Hook_TranslateAnimation = function(swep, anim)
             Source = "look_empty",
             EventTable = {
                 { s = randspin, t = 0.13 },
-                { s = "arc9_eft_shared/weap_handoff.ogg", t = 0.7},
-                { s = randspin, t = 1.32 },
-                { s = "arc9_eft_shared/weap_handon.ogg", t = 1.59},
-                { s = randspin, t = 2.33 },
+                { s = "arc9_eft_shared/weap_handoff.ogg", t = 0.7 * 1.167},
+                { s = randspin, t = 1.32 * 1.167 },
+                { s = "arc9_eft_shared/weap_handon.ogg", t = 1.59 * 1.167},
+                { s = randspin, t = 2.33 * 1.167 },
             },
             IKTimeLine = rik_look
         },
@@ -804,10 +804,10 @@ SWEP.Hook_TranslateAnimation = function(swep, anim)
             EventTable = {
                 { s = randspin, t = 0.1 },
                 -- { s = randspin, t = 0.15 },
-                { s =  path .. "p90_bolt_handle_grab.ogg", t = 0.4 },
-                { s =  path .. "ump_bolt_out_slow.ogg", t = 0.5 },
-                { s =  path .. "ump_bolt_in_slow.ogg", t = 0.96 },
-                { s = randspin, t = 1.3 },
+                { s =  path .. "p90_bolt_handle_grab.ogg", t = 0.4 * 1.167 },
+                { s =  path .. "ump_bolt_out_slow.ogg", t = 0.5 * 1.167 },
+                { s =  path .. "ump_bolt_in_slow.ogg", t = 0.96 * 1.167 },
+                { s = randspin, t = 1.3 * 1.167 },
                 -- { s = randspin, t = 1.48 },
             },
             IKTimeLine = {

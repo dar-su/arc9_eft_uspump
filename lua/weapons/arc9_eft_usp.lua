@@ -496,6 +496,7 @@ SWEP.Animations = {
 
     ["fire"] = {
         Source = "fire",
+        -- Mult = 1.5,
         EventTable = {
             { s = "arc9_eft_shared/weap_trigger_hammer.ogg", t = 0 },
         }
