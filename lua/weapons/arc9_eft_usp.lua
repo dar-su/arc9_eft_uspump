@@ -132,6 +132,7 @@ SWEP.Firemodes = { { Mode = 1 } }
 
 -------------------------- RECOIL
 
+--[[ actual usp recoil!!!!!! disabled cuz bad on low fps
 SWEP.Recoil = 0.1
 SWEP.RecoilCrouchMult = 0.5
 SWEP.VisualRecoilCrouchMult = 0.5
@@ -175,6 +176,72 @@ SWEP.VisualRecoilSpringMagnitude = 2
 
 SWEP.RecoilKick = 0.05 -- Camera recoil
 SWEP.RecoilKickDamping = 10 -- Camera recoil damping
+]]--
+
+
+
+
+
+
+
+
+
+-- TEMP SR1 RECOIL
+
+SWEP.Recoil = 0.1
+SWEP.RecoilCrouchMult = 0.5
+SWEP.VisualRecoilCrouchMult = 0.5
+SWEP.RecoilUp = 0.1 * 0.85 * 1.45 -- patch 0.13.0.4.22617
+SWEP.RecoilSide = 0.015
+SWEP.RecoilRandomUp = 0.06
+SWEP.RecoilRandomSide = 0.01
+SWEP.RecoilDissipationRate = 155
+SWEP.RecoilResetTime = 0.05
+SWEP.RecoilAutoControl = 5
+SWEP.RecoilKick = 0.4
+
+SWEP.ViewRecoil = false 
+SWEP.ViewRecoilUpMult = 250
+SWEP.ViewRecoilSideMult = 300
+
+
+
+SWEP.UseVisualRecoil = true 
+
+SWEP.VisualRecoil = 1.03*0.85*0.85 * 1.45
+SWEP.VisualRecoilMultSights = 1
+SWEP.VisualRecoilMultCrouch = 0.5
+
+SWEP.VisualRecoilUp = 45 * 0.85* 0.85 -- patch 0.13.0.4.22617
+-- SWEP.VisualRecoilUp = 45
+SWEP.VisualRecoilSide = 222 -- Horizontal tilt for visual recoil.
+SWEP.VisualRecoilRoll = 6 -- Roll tilt for visual recoil.
+
+SWEP.VisualRecoilCenter = Vector(2, 17, 2) -- The "axis" of visual recoil. Where your hand is.
+
+SWEP.VisualRecoilPunch = 1 -- How far back visual recoil moves the gun.
+SWEP.VisualRecoilPunchMultSights = 0.5
+SWEP.VisualRecoilPositionBumpUp = -0.009
+
+SWEP.VisualRecoilSpringPunchDamping = 7
+SWEP.VisualRecoilDampingConst = 650
+SWEP.VisualRecoilSpringMagnitude = 2 / 1.67
+
+
+
+SWEP.RecoilKick = 0.05 -- Camera recoil
+SWEP.RecoilKickDamping = 10 -- Camera recoil damping
+
+
+
+
+
+
+
+
+
+
+
 
 
 
