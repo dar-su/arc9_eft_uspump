@@ -115,7 +115,7 @@ SWEP.DropMagazineModel = "models/weapons/arc9/darsu_eft/mods/mag_m9a3.mdl" -- Se
 --     "arc9_eft_shared/weap_magdrop_plastic.ogg"
 -- } -- Table of sounds a dropped magazine should play.
 SWEP.DropMagazineAmount = 0 -- Amount of mags to drop.
-SWEP.DropMagazineTime = 0.66*0.85
+SWEP.DropMagazineTime = 0.5*0.9
 SWEP.DropMagazineQCA = 4
 SWEP.DropMagazinePos = Vector(0, 0, 0)
 SWEP.DropMagazineAng = Angle(90, 180, 90)
@@ -512,8 +512,8 @@ local rst_empty = {
     { s = path .. "1911_slide_out.ogg", t = 2.85-0.05 },
     { s = "arc9_eft_shared/weapon_generic_rifle_spin2.ogg", t = 3.3 },
     {hide = 0, t = 0},
-    {hide = 1, t = 0.4},
-    {hide = 0, t = 0.9}
+    {hide = 1, t = 0.5},
+    {hide = 0, t = 1.1}
     
 }
 

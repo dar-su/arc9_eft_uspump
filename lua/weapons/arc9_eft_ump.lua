@@ -238,7 +238,7 @@ SWEP.SecondarySupplyLimit = 4
 SWEP.ReloadInSights = true
 SWEP.DropMagazineSounds = {}
 SWEP.DropMagazineAmount = 1
-SWEP.DropMagazineTime = 0.7
+SWEP.DropMagazineTime = 0.65
 SWEP.DropMagazineQCA = 4
 SWEP.DropMagazinePos = Vector(0, 0, 0)
 SWEP.DropMagazineAng = Angle(-180, 180-20, 0)
@@ -482,8 +482,8 @@ SWEP.Hook_TranslateAnimation = function(swep, anim)
         { s =  path .. "ump_catchrelease.ogg", t = 2.31 },
         { s = randspin, t = 2.64 },
         {hide = 0, t = 0},
-        {hide = 1, t = 0.7},
-        {hide = 0, t = 1.5}
+        {hide = 1, t = 0.65},
+        {hide = 0, t = 1.0}
     }
     
 
@@ -625,7 +625,7 @@ SWEP.Hook_TranslateAnimation = function(swep, anim)
         ["reload_empty0"] = {
             Source = "reload_empty", 
             MinProgress = 0.85,
-            MagSwapTime = 0.5,
+            MagSwapTime = 1.5,
             FireASAP = true,
             EventTable = rst_empty,
             IKTimeLine = rik_empty
