@@ -337,7 +337,7 @@ SWEP.WorldModelOffset = {
     Pos = Vector(-15.5, 5.5, -4),
     Ang = Angle(-7, 0, 180),
     TPIKPos = Vector(-4, 8, -5), -- rpg
-    TPIKAng = Angle(-5, 0, 180),
+    TPIKAng = Angle(-10, 0, 180),
     Scale = 1
 }
 
@@ -612,7 +612,9 @@ SWEP.Animations = {
     },
     ["reload_empty"] = {
         Source = {"reload_empty0", "reload_empty1", "reload_empty2"}, 
+        -- Source = {"reload_empty2"}, 
         MinProgress = 0.85,
+        MagSwapTime = 1.0,
         FireASAP = true,
         EventTable = rst_empty,
         Mult = 0.9 -- we are TACTICAL
