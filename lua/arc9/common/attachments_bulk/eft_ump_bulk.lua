@@ -181,14 +181,14 @@ ATT = {}
 ATT.PrintName = "HK UMP polymer stock"
 ATT.CompactName = "UMP"
 ATT.Icon = Material("entities/eft_ump_attachments/st.png", "mips smooth")
-ATT.Description = [[A barrel for the HK UMP submachine gun, chambered in .45 ACP ammo, 8 inch (200mm) long.]]
+ATT.Description = [[A polymer stock for the UMP SMG, manufactured by Heckler & Koch.]]
 
 ATT.HasBarrel = true 
 ATT.SortOrder = 0
 ATT.MenuCategory = "ARC9 - EFT Attachments"
 
 ATT.EFTErgoAdd = 2
-ATT.CustomPros = { Ergonomics = "+2", ["Recoil while extended"] = "-34%" }
+ATT.CustomPros = { Ergonomics = "+2", ["Recoil while unfolded"] = "-34%" }
 -- ATT.VisualRecoilMult = 0.66
 -- ATT.RecoilMult = 0.66
 
