@@ -162,7 +162,7 @@ SWEP.VisualRecoilDoingFunc = function(up, side, roll, punch, recamount)
         
         local fakerandom = (((69+recamount%5*CurTime()%3)*2420)%4) * (1-recamount) * 1.3
         
-        return up * recamount + fakerandom, side * 10, roll, punch * 0.5
+        return up * recamount + fakerandom, side * 5, roll, punch * 0.5
     elseif recamount == 1 then
         return up * 1.5, side * 16, roll, punch
     end
