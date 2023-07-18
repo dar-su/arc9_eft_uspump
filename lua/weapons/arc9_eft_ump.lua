@@ -109,12 +109,6 @@ SWEP.RecoilSide = 0.7
 SWEP.RecoilRandomUp = 0.1
 SWEP.RecoilRandomSide = 0.61
 
-SWEP.ViewRecoil = false 
--- SWEP.ViewRecoil = false 
-SWEP.ViewRecoilUpMult = 3
-SWEP.ViewRecoilUpMultMultHipFire = 2
-SWEP.ViewRecoilSideMult = -4
-SWEP.ViewRecoilSideMultMultHipFire = -2
 
 SWEP.RecoilDissipationRate = 11
 SWEP.RecoilAutoControl = 10
@@ -127,19 +121,19 @@ SWEP.VisualRecoilMultHipFire = 0.1
 SWEP.VisualRecoilMultSights = 0.1
 SWEP.VisualRecoilMultCrouch = 0.5
 
-SWEP.VisualRecoilCenter = Vector(2, 17, 2)
-SWEP.VisualRecoilUp = 200*0.85
-SWEP.VisualRecoilSide = 8 
+SWEP.VisualRecoilCenter = Vector(2, 12, 2)
+SWEP.VisualRecoilUp = 300
+SWEP.VisualRecoilSide = 10
 SWEP.VisualRecoilRoll = 33 -- Roll tilt
 
 SWEP.VisualRecoilPunch = 60 -- How far back visual recoil moves the gun
-SWEP.VisualRecoilPunchSights = -300 -- How far back visual recoil moves the gun
+SWEP.VisualRecoilPunchSights = -100 -- How far back visual recoil moves the gun
 
 
-SWEP.VisualRecoilSpringPunchDamping = 16
-SWEP.VisualRecoilDampingConst = 350
+SWEP.VisualRecoilSpringPunchDamping = 10
+SWEP.VisualRecoilDampingConst = 200
 SWEP.VisualRecoilSpringMagnitude = 2 / 1.67
-SWEP.VisualRecoilPositionBumpUp = -0.04 
+SWEP.VisualRecoilPositionBumpUp = -0.03
 SWEP.VisualRecoilPositionBumpUpRTScope = -0.005
 SWEP.VisualRecoilPositionBumpUpHipFire = -0.01
 
@@ -147,7 +141,7 @@ SWEP.VisualRecoilPositionBumpUpHipFire = -0.01
 SWEP.VisualRecoilThinkFunc = function(springconstant, VisualRecoilSpringMagnitude, PUNCH_DAMPING, recamount)
     if recamount > 2 then
         recamount = math.Clamp((recamount - 2) / 20, 0, 1)
-        return springconstant * math.max(1, 10 * recamount), VisualRecoilSpringMagnitude * 0.65, PUNCH_DAMPING * 0.6
+        return springconstant * math.max(1, 5 * recamount), VisualRecoilSpringMagnitude * 0.65, PUNCH_DAMPING * 0.6
     elseif recamount == 1 then
         return springconstant * 1.25, VisualRecoilSpringMagnitude * 0.75, PUNCH_DAMPING * 1
     end
@@ -162,9 +156,9 @@ SWEP.VisualRecoilDoingFunc = function(up, side, roll, punch, recamount)
         
         local fakerandom = (((69+recamount%5*CurTime()%3)*2420)%4) * (1-recamount) * 1.3
         
-        return up * recamount + fakerandom, side * 5, roll, punch * 0.5
+        return up * recamount + fakerandom, (side * 5)-fakerandom*0.02, roll, punch * 0.5
     elseif recamount == 1 then
-        return up * 1.5, side * 16, roll, punch
+        return up * 1.5, side * 4, roll, punch
     end
 
     return up, side, roll, punch

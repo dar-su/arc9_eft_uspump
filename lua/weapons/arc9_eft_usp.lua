@@ -145,10 +145,6 @@ SWEP.RecoilResetTime = 0.05
 SWEP.RecoilAutoControl = 5
 SWEP.RecoilKick = 0.4
 
-SWEP.ViewRecoil = false 
-SWEP.ViewRecoilUpMult = 250
-SWEP.ViewRecoilSideMult = 300
-
 
 
 SWEP.UseVisualRecoil = true 
@@ -199,10 +195,6 @@ SWEP.RecoilDissipationRate = 155
 SWEP.RecoilResetTime = 0.05
 SWEP.RecoilAutoControl = 5
 SWEP.RecoilKick = 0.4
-
-SWEP.ViewRecoil = false 
-SWEP.ViewRecoilUpMult = 250
-SWEP.ViewRecoilSideMult = 300
 
 
 
