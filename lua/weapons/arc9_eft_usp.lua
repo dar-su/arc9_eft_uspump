@@ -465,6 +465,12 @@ SWEP.Animations = {
             { s = path .. "1911_slide_out.ogg", t = 0.87 },
             { s = "arc9_eft_shared/weapon_generic_rifle_spin2.ogg", t = 1.41 },
         },
+        IKTimeLine = {
+            { t = 0, lhik = 1 },
+            { t = 0.25, lhik = 0 },
+            { t = 0.6, lhik = 0 },
+            { t = 1, lhik = 1 },
+        },
     },
 
     ["draw"] = {
@@ -525,13 +531,25 @@ SWEP.Animations = {
         Source = "reload_single",
         MinProgress = 0.85,
         FireASAP = true,
-        EventTable = rst_single
+        EventTable = rst_single,
+        IKTimeLine = {
+            { t = 0, lhik = 1 },
+            { t = 0.25, lhik = 0 },
+            { t = 0.85, lhik = 0 },
+            { t = 1, lhik = 1 },
+        },
     },
     ["reload_empty_single"] = {
         Source = "reload_single",
         MinProgress = 0.85,
         FireASAP = true,
-        EventTable = rst_single
+        EventTable = rst_single,
+        IKTimeLine = {
+            { t = 0, lhik = 1 },
+            { t = 0.25, lhik = 0 },
+            { t = 0.85, lhik = 0 },
+            { t = 1, lhik = 1 },
+        },
     },
 
     ["reload"] = {
@@ -539,7 +557,13 @@ SWEP.Animations = {
         MinProgress = 0.85,
         FireASAP = true,
         EventTable = rst_def,
-        Mult = 0.85 -- we are TACTICAL
+        Mult = 0.85, -- we are TACTICAL
+        IKTimeLine = {
+            { t = 0, lhik = 1 },
+            { t = 0.25, lhik = 0 },
+            { t = 0.8, lhik = 0 },
+            { t = 1, lhik = 1 },
+        },
     },
     ["reload_empty"] = {
         Source = {"reload_empty0", "reload_empty1", "reload_empty2"}, 
@@ -548,7 +572,13 @@ SWEP.Animations = {
         MagSwapTime = 1.0,
         FireASAP = true,
         EventTable = rst_empty,
-        Mult = 0.9 -- we are TACTICAL
+        Mult = 0.9,
+        IKTimeLine = {
+            { t = 0, lhik = 1 },
+            { t = 0.25, lhik = 0 },
+            { t = 0.85, lhik = 0 },
+            { t = 1, lhik = 1 },
+        },
     },
 
     ["toggle"] = {
@@ -592,6 +622,13 @@ SWEP.Animations = {
             { s = randspin, t = 3.59 },
             { s = "arc9_eft_shared/weapon_generic_rifle_spin2.ogg", t = 3.84 },
         },
+        IKTimeLine = {
+            { t = 0, lhik = 1 },
+            { t = 0.3, lhik = 1},
+            { t = 0.4, lhik = 0 },
+            { t = 0.8, lhik = 0 },
+            { t = 1, lhik = 1 },
+        },
         -- EjectAt = 1.6 + 1.292
     },        
     
@@ -612,6 +649,13 @@ SWEP.Animations = {
             { s =  path .. "1911_slide_in_fast.ogg", t = 4.09 },
             { s = randspin, t = 4.42 },
             { s = "arc9_eft_shared/weapon_generic_rifle_spin2.ogg", t = 4.6 },
+        },
+        IKTimeLine = {
+            { t = 0, lhik = 1 },
+            { t = 0.2, lhik = 1},
+            { t = 0.4, lhik = 0 },
+            { t = 0.8, lhik = 0 },
+            { t = 1, lhik = 1 },
         },
         EjectAt = 3.95
     },      
@@ -636,6 +680,13 @@ SWEP.Animations = {
             { s = randspin, t = 4.63 },
             { s = "arc9_eft_shared/weapon_generic_rifle_spin2.ogg", t = 4.74 },
         },
+        IKTimeLine = {
+            { t = 0, lhik = 1 },
+            { t = 0.2, lhik = 1},
+            { t = 0.4, lhik = 0 },
+            { t = 0.8, lhik = 0 },
+            { t = 1, lhik = 1 },
+        },
         -- EjectAt = 2.59 + 1.292
     },        
     
@@ -653,6 +704,13 @@ SWEP.Animations = {
             { s =  path .. "1911_slide_in_fast.ogg", t = 2.42 },
             { s = randspin, t = 2.76 },
             { s = "arc9_eft_shared/weapon_generic_rifle_spin2.ogg", t = 2.94 },
+        },
+        IKTimeLine = {
+            { t = 0, lhik = 1 },
+            { t = 0.4, lhik = 1},
+            { t = 0.5, lhik = 0 },
+            { t = 0.8, lhik = 0 },
+            { t = 1, lhik = 1 },
         },
         EjectAt = 2.25
     },
@@ -673,7 +731,13 @@ SWEP.Animations = {
             { s = "arc9_eft_shared/weapon_generic_pistol_spin4.ogg", t = 1.62 },
             { s = randspin, t = 2.96 },
             { s = "arc9_eft_shared/weapon_generic_rifle_spin2.ogg", t = 3.25 },
-        }
+        },
+        IKTimeLine = {
+            { t = 0, lhik = 1 },
+            { t = 0.2, lhik = 0 },
+            { t = 0.8, lhik = 0 },
+            { t = 1, lhik = 1 },
+        },
     },
 
     ["inspect2"] = {
@@ -690,7 +754,13 @@ SWEP.Animations = {
             { s =  path .. "fiveseven_mag_in.ogg", t = 3.03 },
             { s = randspin, t = 3.42 },
             { s = "arc9_eft_shared/weapon_generic_rifle_spin2.ogg", t = 3.5 },
-        }
+        },
+        IKTimeLine = {
+            { t = 0, lhik = 1 },
+            { t = 0.15, lhik = 0 },
+            { t = 0.8, lhik = 0 },
+            { t = 1, lhik = 1 },
+        },
     },
 
     ["inspect0"] = {
@@ -703,7 +773,13 @@ SWEP.Animations = {
             { s = path .. "fiveseven_slider_out_slow.ogg", t = 1.49 },
             { s = randspin, t = 1.86 },
             { s = "arc9_eft_shared/weapon_generic_rifle_spin2.ogg", t = 2.15 },
-        }
+        },
+        IKTimeLine = {
+            { t = 0, lhik = 1 },
+            { t = 0.25, lhik = 0 },
+            { t = 0.75, lhik = 0 },
+            { t = 1, lhik = 1 },
+        },
     },
 
     ["inspect_empty0"] = {
@@ -715,7 +791,13 @@ SWEP.Animations = {
             { s = "arc9_eft_shared/weapon_generic_pistol_spin4.ogg", t = 1.62 },
             { s = randspin, t = 2.96 },
             { s = "arc9_eft_shared/weapon_generic_rifle_spin2.ogg", t = 3.25 },
-        }
+        },
+        IKTimeLine = {
+            { t = 0, lhik = 1 },
+            { t = 0.2, lhik = 0 },
+            { t = 0.8, lhik = 0 },
+            { t = 1, lhik = 1 },
+        },
     },
 
     ["inspect_empty2"] = {
@@ -732,7 +814,13 @@ SWEP.Animations = {
             { s =  path .. "fiveseven_mag_in.ogg", t = 3.03 },
             { s = randspin, t = 3.42 },
             { s = "arc9_eft_shared/weapon_generic_rifle_spin2.ogg", t = 3.5 },
-        }
+        },
+        IKTimeLine = {
+            { t = 0, lhik = 1 },
+            { t = 0.15, lhik = 0 },
+            { t = 0.8, lhik = 0 },
+            { t = 1, lhik = 1 },
+        },
     },
 }
 
