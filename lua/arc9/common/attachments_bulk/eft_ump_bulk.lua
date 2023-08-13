@@ -183,7 +183,6 @@ ATT.CompactName = "UMP"
 ATT.Icon = Material("entities/eft_ump_attachments/st.png", "mips smooth")
 ATT.Description = [[A polymer stock for the UMP SMG, manufactured by Heckler & Koch.]]
 
-ATT.HasBarrel = true 
 ATT.SortOrder = 0
 ATT.MenuCategory = "ARC9 - EFT Attachments"
 
