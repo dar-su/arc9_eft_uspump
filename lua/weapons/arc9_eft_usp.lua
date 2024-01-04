@@ -130,6 +130,8 @@ SWEP.HeatLockout = false
 SWEP.RPM = 450 -- idk ?
 SWEP.Firemodes = { { Mode = 1 } }
 
+
+
 --          Recoil
 -- touch these
 
