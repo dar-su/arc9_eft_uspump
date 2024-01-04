@@ -168,7 +168,7 @@ SWEP.VisualRecoilCenter = Vector(2, 25, 1) -- ugh, i dont now what to set it too
 SWEP.VisualRecoilCenterHipFire = Vector(2, 39, 0)
 local EFT_ShotsToSwitchToFullAutoBehaviur = 2 -- how many shots for switch to fullauto stats from semi/burst, + 2 shots afterwards are lerping. you probably should not touch this but ok
 
-SWEP.RecoilKick = 0.5 -- camera roll each shot + makes camera go more up when fullautoing
+SWEP.RecoilKick = 0.25 -- camera roll each shot + makes camera go more up when fullautoing
 
 -- dont touch this i guess
 
